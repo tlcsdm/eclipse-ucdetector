@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.5"?>
+<plugin>
+  <!-- ===================================================================== -->
+  <!-- POP UP                                                                -->
+  <!-- ===================================================================== -->
+	<extension point="org.eclipse.ui.popupMenus">
+		<objectContribution	adaptable="true"
+				objectClass="org.eclipse.jdt.core.IJavaElement"
+				id="com.tlcsdm.eclipse.ucdetector.popupMenus.project">
+			<menu label="%popupMenus.root"
+					path="additions"
+					id="ucdetectorGroup">
+			</menu>
+		</objectContribution>
+
+        <!-- Example -->
+		<objectContribution	adaptable="true"
+				id="com.tlcsdm.eclipse.ucdetector.popupMenus.project.Analyze"
+				objectClass="org.eclipse.jdt.core.IJavaElement">
+			<action class="com.tlcsdm.eclipse.ucdetector.action.ExampleAction"
+				enablesFor="+"
+				id="com.tlcsdm.eclipse.ucdetector.action.ExampleAction"
+				label="%ExampleAction.label"
+				tooltip="%ExampleAction.tooltip"
+				icon="$nl$/icons/example.gif"
+				menubarPath="ucdetectorGroup/additional"/>
+		</objectContribution>
+		<!-- CheckUcdMarker -->
+		<objectContribution adaptable="true"
+		      id="com.tlcsdm.eclipse.ucdetector.popupMenus.project.Analyze"
+		      objectClass="org.eclipse.jdt.core.IJavaElement">
+			<action class="com.tlcsdm.eclipse.ucdetector.action.CheckUcdMarkerAction"
+				enablesFor="+"
+				icon="$nl$/icons/help_search.gif"
+				id="com.tlcsdm.eclipse.ucdetector.action.CheckUcdMarkerAction"
+				label="%check.ucd.action.label"
+				menubarPath="ucdetectorGroup/additional">
+			</action>
+		</objectContribution>
+	</extension>
+
+  <!-- ===================================================================== -->
+  <!-- MARKER                                                                -->
+  <!-- ===================================================================== -->
+  <!-- Example -->
+	<extension point="org.eclipse.core.resources.markers"
+			id="com.tlcsdm.eclipse.ucdetector.analyzeMarkerExample"
+			name="%example.marker.name" >
+		<super type="org.eclipse.core.resources.problemmarker"/>
+		<super type="org.eclipse.core.resources.textmarker"/>
+		<super type="com.tlcsdm.eclipse.ucdetector.analyzeMarker"/>
+		<persistent value="true"></persistent>
+	</extension>
+	  <!-- CheckUcdMarker -->
+	<extension point="org.eclipse.core.resources.markers"
+	   id="com.tlcsdm.eclipse.ucdetector.analyzeMarkerCheckUcdMarkers"
+	   name="%check.ucd.marker.name" >
+		<super type="org.eclipse.core.resources.problemmarker"></super>
+		<super type="org.eclipse.core.resources.textmarker"></super>
+		<super type="com.tlcsdm.eclipse.ucdetector.analyzeMarker"></super>
+		<persistent value="true"></persistent>
+	 </extension>
+
+  <!-- ===================================================================== -->
+  <!-- ANNOTATION TYPES                                                      -->
+  <!-- ===================================================================== -->
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<!-- Example -->
+		<type name="com.tlcsdm.eclipse.ucdetector.analyzeMarkerExample"
+				super="org.eclipse.ui.workbench.texteditor.warning"
+				markerType="com.tlcsdm.eclipse.ucdetector.analyzeMarkerExample"/>
+		<!-- CheckUcdMarker -->
+		<type  markerType="com.tlcsdm.eclipse.ucdetector.analyzeMarkerCheckUcdMarkers"
+		      name="com.tlcsdm.eclipse.ucdetector.analyzeMarkerCheckUcdMarkers"
+		      super="org.eclipse.ui.workbench.texteditor.warning" />
+	</extension>
+ 
+  <!-- ===================================================================== -->
+  <!-- ANNOTATION SPECIFICATION                                              -->
+  <!-- ===================================================================== -->
+  <!-- Example -->
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="com.tlcsdm.eclipse.ucdetector.analyzeMarkerExample"
+				icon="icons/help_search.gif"
+				includeOnPreferencePage="true"
+				label="%example.specification.label"/>
+		<!-- CheckUcdMarker -->
+		<specification annotationType="com.tlcsdm.eclipse.ucdetector.analyzeMarkerCheckUcdMarkers"
+		      icon="icons/help_search.gif"
+		      includeOnPreferencePage="true"
+		      label="%check.ucd.specification.label"/>
+	</extension>
+ 
+   <!-- =====================================================================
+       UCDETECTOR HEADLESS
+       ===================================================================== -->
+    <extension point="com.tlcsdm.eclipse.ucdetector.headless">
+       <iterator class="com.tlcsdm.eclipse.ucdetector.iterator.CheckUcdMarkerIterator" id="com.tlcsdm.eclipse.ucdetector.additional.check_marker" ordinal="10"></iterator>
+    </extension>
+
+  <!-- =====================================================================
+       UCDETECTOR REPORTS
+       ===================================================================== -->
+    <extension point="com.tlcsdm.eclipse.ucdetector.reports">
+       <report resultFile="${reportName}_add.txt"
+               description="%report.additional.name"
+               id="additional" 
+               class="com.tlcsdm.eclipse.ucdetector.report.AdditionalReport" >
+       </report>
+    </extension>
+</plugin>
