@@ -40,7 +40,7 @@ UCDetector（不必要的代码检测器 - 发音为“You See Detector”）是
 
 ## 历史变更
 
-历史变更日志请参见仓库根目录下的 [`changes.md`](changes.md)。仓库根目录下的 `launches/` 文件夹提供了用于在 Eclipse 中运行/调试 UCDetector 的启动配置。
+历史变更日志请参见仓库根目录下的 [`CHANGELOG.md`](CHANGELOG.md)。仓库根目录下的 `launches/` 文件夹提供了用于在 Eclipse 中运行/调试 UCDetector 的启动配置。
 
 ## 许可证
 

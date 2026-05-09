@@ -53,7 +53,7 @@ The `launches/` folder contains ready-to-use Eclipse launch configurations (`UCD
 UCDetector was originally created by Jörg Spieler and distributed from http://www.ucdetector.org/index.html. This fork keeps the original UCDetector project information and license attribution while updating the project structure and compatibility baseline.
 
 * 2.1.0: refactored to the `com.tlcsdm.eclipse.ucdetector` namespace, moved to a pomless Tycho layout, and raised the baseline to Java 17 + Eclipse 2024-06.
-* 2.0.x and earlier: see [`changes.md`](changes.md) for the original change history.
+* 2.0.x and earlier: see [`CHANGELOG.md`](CHANGELOG.md) for the original change history.
 
 ## License
 

@@ -383,14 +383,14 @@
        HELP.TOC
        ===================================================================== -->
   <extension point="org.eclipse.help.toc">
-    <toc file="help/toc.xml" primary="true"></toc>
+    <toc file="help/help_toc.xml" primary="true"></toc>
   </extension>
 
   <!-- =====================================================================
        HELP.CONTEXTS
        ===================================================================== -->
   <extension point="org.eclipse.help.contexts">
-    <contexts file="help/contexts.xml" plugin="com.tlcsdm.eclipse.ucdetector"></contexts>
+    <contexts file="help/help_contexts.xml" plugin="com.tlcsdm.eclipse.ucdetector"></contexts>
   </extension>
 
   <!-- =====================================================================
