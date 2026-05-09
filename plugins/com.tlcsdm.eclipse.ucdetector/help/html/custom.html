@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>UCDetector - Custom detectors</title>
+</head>
+<body>
+<h1>Writing your own UCDetector detector</h1>
+<p>
+UCDetector can be extended with custom detectors. The companion plug-in
+<code>com.tlcsdm.eclipse.ucdetector.additional</code> in this repository is a
+working example showing how to:
+</p>
+<ul>
+  <li>Add a new <code>Action</code> and contribute it via the
+      <code>org.eclipse.ui.popupMenus</code> extension point.</li>
+  <li>Implement a custom <code>Iterator</code> that walks the relevant Java
+      elements and creates markers using
+      <code>AdditionalIterator.createMarker()</code>.</li>
+  <li>Declare new marker types via
+      <code>org.eclipse.core.resources.markers</code>,
+      <code>org.eclipse.ui.editors.annotationTypes</code> and
+      <code>org.eclipse.ui.editors.markerAnnotationSpecification</code>.</li>
+  <li>Externalize labels in <code>plugin.properties</code>.</li>
+</ul>
+<p>
+Use the <code>com.tlcsdm.eclipse.ucdetector.additional</code> module as a template
+when adding your own detectors.
+</p>
+</body>
+</html>
