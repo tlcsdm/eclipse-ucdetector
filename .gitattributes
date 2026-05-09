@@ -1,3 +1,4 @@
-**/about.html        linguist-vendored
-**/license.html      linguist-vendored
+**/**/about.html        linguist-vendored
+**/**/license.html      linguist-vendored
+**/**/epl-v20.html      linguist-vendored
 plugins/com.tlcsdm.eclipse.ucdetector/help/**        linguist-vendored
