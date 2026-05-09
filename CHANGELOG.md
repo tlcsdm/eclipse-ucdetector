@@ -1,3 +1,11 @@
+# Changes
+
+This file preserves the historical change log inherited from the original
+[UCDetector](https://sourceforge.net/projects/ucdetector/) project.
+Newer changes for this fork are tracked in the GitHub releases of
+[tlcsdm/eclipse-ucdetector](https://github.com/tlcsdm/eclipse-ucdetector/releases).
+
+```text
 UCDetector 2.1.0 from XXX - eclipse >=4.2 (3.8):
 
 New features:
@@ -249,3 +257,4 @@ Bugfixes:
 UCDetector 0.9.0 from 2008-03-01:
  - first version
 
+```

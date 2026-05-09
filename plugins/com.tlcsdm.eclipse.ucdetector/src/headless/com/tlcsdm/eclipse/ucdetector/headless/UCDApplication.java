@@ -22,11 +22,6 @@ import com.tlcsdm.eclipse.ucdetector.search.UCDProgressMonitor;
  *
  * Run UCDetector from command line as an application in headless mode.
  * <p>
- * See files:
- * <pre>/com.tlcsdm.eclipse.ucdetector/ant/detect.sh</pre>
- * <pre>/com.tlcsdm.eclipse.ucdetector/ant/detect.bat</pre>
- * <pre>/com.tlcsdm.eclipse.ucdetector/ant/build.xml</pre>
- * <p>
  * @author Joerg Spieler
  * @since 31.03.2011
  */

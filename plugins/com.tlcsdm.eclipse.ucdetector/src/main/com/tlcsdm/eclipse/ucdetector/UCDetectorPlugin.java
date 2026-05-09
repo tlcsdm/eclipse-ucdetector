@@ -85,7 +85,7 @@ public class UCDetectorPlugin extends AbstractUIPlugin {
 
   /**
    * Internal id for eclipse help
-   * see /com.tlcsdm.eclipse.ucdetector/help/contexts.xml
+   * see /com.tlcsdm.eclipse.ucdetector/help/help_contexts.xml
    * http://www.eclipse.org/articles/article.php?file=Article-AddingHelpToRCP/index.html
    */
   public static final String HELP_ID = ID + ".ucd_context_id";

@@ -1,0 +1,53 @@
+<html>
+<head>
+  <title>UCDetector Plug-in - Headless Usage</title>
+  <link rel="stylesheet" href="book.css" charset="ISO-8859-1" type="text/css"/>
+</head>
+<body>
+  <h1>Headless Usage</h1>
+
+  <p>
+    UCDetector can run without the Eclipse UI by starting the application
+    <code>com.tlcsdm.eclipse.ucdetector.detect</code>. This is useful for CI jobs or scripted workspace checks.
+  </p>
+
+  <h2>Command line example</h2>
+  <pre>java -Xmx2048m -jar &lt;ECLIPSE_HOME&gt;/plugins/org.eclipse.equinox.launcher_&lt;version&gt;.jar \
+  -clean -data &lt;WORKSPACE&gt; \
+  -application com.tlcsdm.eclipse.ucdetector.detect \
+  -ucd.options &lt;path-to&gt;/ucdetector.options</pre>
+
+  <p>
+    The repository's <code>launches/UCDetector-run-headless.launch</code> file uses the same application id and is the easiest
+    way to debug the headless flow inside Eclipse.
+  </p>
+
+  <h2>Options file</h2>
+  <p>
+    The <code>-ucd.options</code> argument points to a properties file. It can contain normal UCDetector preferences together
+    with these headless-specific keys:
+  </p>
+  <ul>
+    <li><code>com.tlcsdm.eclipse.ucdetector.internal.headless.buildType</code> - <code>FULL_BUILD</code> or <code>INCREMENTAL_BUILD</code>.</li>
+    <li><code>com.tlcsdm.eclipse.ucdetector.internal.headless.targetPlatformFile</code> - optional target definition file.</li>
+    <li><code>com.tlcsdm.eclipse.ucdetector.internal.headless.report</code> - <code>eachproject</code> or <code>single</code>.</li>
+    <li><code>com.tlcsdm.eclipse.ucdetector.internal.headless.resourcesToIterate</code> - comma-separated workspace resources to limit the scope.</li>
+  </ul>
+
+  <h2>Minimal example</h2>
+  <pre>com.tlcsdm.eclipse.ucdetector.log.level = INFO
+com.tlcsdm.eclipse.ucdetector.internal.headless.buildType = FULL_BUILD
+com.tlcsdm.eclipse.ucdetector.internal.headless.report = eachproject
+# com.tlcsdm.eclipse.ucdetector.internal.headless.resourcesToIterate = my.project/src/main</pre>
+
+  <h2>Interactive console commands</h2>
+  <p>
+    While the headless application is running, you can type commands in the console:
+  </p>
+  <ul>
+    <li><code>h</code> or <code>?</code> - print the help text again</li>
+    <li><code>s</code> - stop or continue the monitor</li>
+    <li><code>e</code> - cancel and exit</li>
+  </ul>
+</body>
+</html>
