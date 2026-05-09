@@ -1,5 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
+Automatic-Module-Name: com.tlcsdm.eclipse.ucdetector
 Bundle-Name: %pluginName
 Bundle-SymbolicName: com.tlcsdm.eclipse.ucdetector;singleton:=true
 Bundle-Version: 2.1.0.qualifier

@@ -48,4 +48,4 @@ UCDetector was originally created by Jörg Spieler and distributed from http://w
 
 ## License
 
-UCDetector keeps the original author license information. See `LICENSE`, `features/com.tlcsdm.eclipse.ucdetector.feature/feature.properties`, and http://www.ucdetector.org/index.html for details.
+UCDetector keeps the original author license information. See `LICENSE` and http://www.ucdetector.org/index.html for details.
