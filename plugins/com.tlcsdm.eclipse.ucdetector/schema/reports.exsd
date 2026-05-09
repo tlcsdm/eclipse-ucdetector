@@ -1,0 +1,156 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Schema file written by PDE -->
+<schema targetNamespace="com.tlcsdm.eclipse.ucdetector" xmlns="http://www.w3.org/2001/XMLSchema">
+<annotation>
+      <appinfo>
+         <meta.schema plugin="com.tlcsdm.eclipse.ucdetector" id="reports" name="UCDetector Reports"/>
+      </appinfo>
+      <documentation>
+         Create custom UCDetector reports using a class or a xslt stylesheet
+      </documentation>
+   </annotation>
+
+   <element name="extension">
+      <annotation>
+         <appinfo>
+            <meta.element />
+         </appinfo>
+      </annotation>
+      <complexType>
+         <sequence minOccurs="1" maxOccurs="unbounded">
+            <element ref="report"/>
+         </sequence>
+         <attribute name="point" type="string" use="required">
+            <annotation>
+               <documentation>
+                  a fully qualified identifier of the target extension point
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string">
+            <annotation>
+               <documentation>
+                  an optional identifier of the extension instance
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  an optional name of the extension instance
+               </documentation>
+               <appinfo>
+                  <meta.attribute translatable="true"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="report">
+      <complexType>
+         <attribute name="resultFile" type="string" use="required">
+            <annotation>
+               <documentation>
+                  Example: My${reportName}.html &lt;b&gt;Do not use file name pattern already declared in
+ extension point=&quot;com.tlcsdm.eclipse.ucdetector.reports&quot;&lt;/b&gt;
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="description" type="string" use="required">
+            <annotation>
+               <documentation>
+                  Description of the report.
+The description is shown UCDetector preferences dialog tab &quot;Report&quot;.
+               </documentation>
+               <appinfo>
+                  <meta.attribute translatable="true"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="class" type="string">
+            <annotation>
+               <documentation>
+                  the fully qualified name of a Java class implementing 
+the UCDetector report. This class must implement
+&lt;code&gt;com.tlcsdm.eclipse.ucdetector.report.IUCDetectorReport&lt;/code&gt;.
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn=":com.tlcsdm.eclipse.ucdetector.report.IUCDetectorReport"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="stylesheet" type="string">
+            <annotation>
+               <documentation>
+                  Name of a xslt resource used to create report. For example: org/ucdetector/report/html.xslt
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string" use="required">
+            <annotation>
+               <documentation>
+                  an requiered identifier of the report instance
+               </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="since"/>
+      </appinfo>
+      <documentation>
+         UCDetector 2.0.0
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="examples"/>
+      </appinfo>
+      <documentation>
+         The following is an example of an java reports extension point: 
+&lt;p&gt;
+&lt;pre&gt;
+    &lt;extension point=&quot;com.tlcsdm.eclipse.ucdetector.reports&quot;&gt;
+       &lt;report resultFile=&quot;${reportName}.html&quot; description=&quot;html&quot; id=&quot;html.id&quot; stylesheet=&quot;org/ucdetector/report/html.xslt&quot;&gt;&lt;/report&gt;
+       &lt;report resultFile=&quot;${reportName}.txt&quot;  description=&quot;text&quot; id=&quot;text.id&quot; class=&quot;com.tlcsdm.eclipse.ucdetector.report.TextReport&quot;    &gt;&lt;/report&gt;
+    &lt;/extension&gt;
+&lt;/pre&gt;
+&lt;/p&gt;
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="apiinfo"/>
+      </appinfo>
+      <documentation>
+         Java Reports must implement the Interface &lt;code&gt;com.tlcsdm.eclipse.ucdetector.report.IUCDetectorReport&lt;/code&gt;
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="implementation"/>
+      </appinfo>
+      <documentation>
+         UCDetector uses the class com.tlcsdm.eclipse.ucdetector.report.TextReport
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="copyright"/>
+      </appinfo>
+      <documentation>
+         Copyright (c) 2016 Joerg Spieler All rights reserved. This program and the&lt;br&gt;
+accompanying materials are made available under the terms of the Eclipse&lt;br&gt;
+Public License v1.0 which accompanies this distribution, and is available at&lt;br&gt;
+&lt;a href=&quot;http://www.eclipse.org/legal/epl-v10.html&quot;&gt;http://www.eclipse.org/legal/epl-v10.html&lt;/a&gt;
+      </documentation>
+   </annotation>
+
+</schema>

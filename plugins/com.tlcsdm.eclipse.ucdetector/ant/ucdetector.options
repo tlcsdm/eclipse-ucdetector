@@ -1,0 +1,141 @@
+### -------------------------------------------------------------------------
+###               UCDetector preference file for mode: 'Default'
+### -------------------------------------------------------------------------
+### Created by  : UCDetector 2.0.0
+### Created date: 2016-04-14 01:59:43
+### java.util.Properties.load() may fail to load this file
+### -------------------------------------------------------------------------
+### :mode=properties:
+
+## --------------------------------------------------------------------------
+## Tab: Ignore
+## --------------------------------------------------------------------------
+
+# Group: Resources
+com.tlcsdm.eclipse.ucdetector.sourceFolderFilter = *test*,*gen*,
+com.tlcsdm.eclipse.ucdetector.packageFilter      = *test*,
+
+# Group: Classes
+com.tlcsdm.eclipse.ucdetector.classFilter               = Test*,*Test,
+com.tlcsdm.eclipse.ucdetector.superClassFilter          = 
+com.tlcsdm.eclipse.ucdetector.containString             = 
+com.tlcsdm.eclipse.ucdetector.classWithMainMethodFilter = false
+com.tlcsdm.eclipse.ucdetector.ignoreDerived             = true
+
+# Group: Marked code
+com.tlcsdm.eclipse.ucdetector.annotationsFilter = Generated,Inject*,
+com.tlcsdm.eclipse.ucdetector.ignoreDeprecated  = false
+com.tlcsdm.eclipse.ucdetector.ignore.NO_UCD     = true
+
+# Group: Others
+com.tlcsdm.eclipse.ucdetector.fieldFilter      = test*,*Test,
+com.tlcsdm.eclipse.ucdetector.methodFilter     = test*,*Test,
+com.tlcsdm.eclipse.ucdetector.beanMethodFilter = true
+
+## --------------------------------------------------------------------------
+## Tab: Detect
+## --------------------------------------------------------------------------
+
+# Group: What to detect
+com.tlcsdm.eclipse.ucdetector.warnLimit      = 0
+com.tlcsdm.eclipse.ucdetector.classes        = WARNING
+com.tlcsdm.eclipse.ucdetector.methods        = WARNING
+com.tlcsdm.eclipse.ucdetector.member         = WARNING
+com.tlcsdm.eclipse.ucdetector.detectTestOnly = true
+
+# Group: Search class name in files
+com.tlcsdm.eclipse.ucdetector.literalsCheck        = true
+com.tlcsdm.eclipse.ucdetector.checkFullClassName   = true
+com.tlcsdm.eclipse.ucdetector.checkSimpleClassName = false
+com.tlcsdm.eclipse.ucdetector.literals             = *.xml,MANIFEST.MF,
+
+# Group: Cycles
+com.tlcsdm.eclipse.ucdetector.cycleDepth = 4
+
+## --------------------------------------------------------------------------
+## Tab: Keywords
+## --------------------------------------------------------------------------
+
+# Group: Use final
+com.tlcsdm.eclipse.ucdetector.finalMethod = IGNORE
+com.tlcsdm.eclipse.ucdetector.finalField  = IGNORE
+
+# Group: Reduce visibility
+com.tlcsdm.eclipse.ucdetector.visibility.protected.classes      = WARNING
+com.tlcsdm.eclipse.ucdetector.visibility.private.classes        = WARNING
+com.tlcsdm.eclipse.ucdetector.visibility.protected.methods      = WARNING
+com.tlcsdm.eclipse.ucdetector.visibility.private.methods        = WARNING
+com.tlcsdm.eclipse.ucdetector.visibility.protected.fields       = WARNING
+com.tlcsdm.eclipse.ucdetector.visibility.private.fields         = WARNING
+com.tlcsdm.eclipse.ucdetector.ignore.synthetic.access.emulation = true
+com.tlcsdm.eclipse.ucdetector.visibility.protected.constants    = WARNING
+com.tlcsdm.eclipse.ucdetector.visibility.private.constants      = WARNING
+
+## --------------------------------------------------------------------------
+## Tab: Report
+## --------------------------------------------------------------------------
+
+# Group: Reports
+com.tlcsdm.eclipse.ucdetector.report.create.xml        = true
+com.tlcsdm.eclipse.ucdetector.report.create.text       = true
+com.tlcsdm.eclipse.ucdetector.report.create.additional = true
+com.tlcsdm.eclipse.ucdetector.report.create.html       = true
+com.tlcsdm.eclipse.ucdetector.report.file              = UCDetectorReport_${number}
+com.tlcsdm.eclipse.ucdetector.report.dir               = 
+
+## --------------------------------------------------------------------------
+## Tab: Other
+## --------------------------------------------------------------------------
+
+# Group: Logging
+com.tlcsdm.eclipse.ucdetector.log.level     = INFO
+com.tlcsdm.eclipse.ucdetector.log.toEclipse = false
+
+# Group: Files and directories:
+
+
+
+
+#############################################################################
+#                  UCDetector headless preferences                          #
+#############################################################################
+
+# == buildType ==
+# * One of
+# ** FULL_BUILD        [default]
+# ** INCREMENTAL_BUILD 
+# * For details see: org.eclipse.core.resources.IncrementalProjectBuilder
+#com.tlcsdm.eclipse.ucdetector.internal.headless.buildType = FULL_BUILD
+
+# == targetPlatformFile ==
+# * If ECLIPSE_HOME is not your target platform
+# ** Change file ucdetector.target
+# ** Uncomment next line
+# com.tlcsdm.eclipse.ucdetector.internal.headless.targetPlatformFile = ucdetector.target
+
+# == report ==
+# * One of
+# ** eachproject [default] (create a report for each project)
+# ** single (create a single report)
+#com.tlcsdm.eclipse.ucdetector.internal.headless.report = eachproject
+
+# == resourcesToIterate ==
+# * Leave empty to iterate all projects in workspace [default]
+# * Separate several resources by ','
+# * Usage of new lines see example below
+#com.tlcsdm.eclipse.ucdetector.internal.headless.resourcesToIterate =
+
+##---------------------------#
+## Complete headless example #
+##---------------------------#
+
+#com.tlcsdm.eclipse.ucdetector.internal.headless.buildType          = FULL_BUILD
+
+# The following strings are replaced: ${WORKSPACE}, ${ECLIPSE_HOME}
+#com.tlcsdm.eclipse.ucdetector.internal.headless.targetPlatformFile = ${WORKSPACE}/myProject/eclipse-3.7-gef.target
+
+#com.tlcsdm.eclipse.ucdetector.internal.headless.report             = single
+#com.tlcsdm.eclipse.ucdetector.internal.headless.resourcesToIterate = \
+# com.tlcsdm.eclipse.ucdetector/src/main,\
+# com.tlcsdm.eclipse.ucdetector/src/cycle/org/ucdetector/cycle,\
+# com.tlcsdm.eclipse.ucdetector.example 

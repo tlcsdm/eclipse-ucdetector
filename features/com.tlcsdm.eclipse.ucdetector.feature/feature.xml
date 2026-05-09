@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="com.tlcsdm.eclipse.ucdetector.feature"
+      label="Tlcsdm UCDetector"
+      version="2.1.0.qualifier"
+      provider-name="%providerName"
+      plugin="com.tlcsdm.eclipse.ucdetector">
+
+   <description url="http://www.ucdetector.org/">
+      %description
+   </description>
+
+   <copyright url="http://www.ucdetector.org/license.html">
+      %copyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <url>
+      <update label="Unnecessary Code Detector Updates" url="https://raw.githubusercontent.com/tlcsdm/eclipse-ucdetector/update_site/"/>
+      <discovery label="Unnecessary Code Detector Update Site" url="https://raw.githubusercontent.com/tlcsdm/eclipse-ucdetector/update_site/"/>
+   </url>
+
+   <requires>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.jdt.core"/>
+      <import plugin="org.eclipse.jdt.ui"/>
+      <import plugin="org.eclipse.search"/>
+      <import plugin="org.eclipse.jface"/>
+      <import plugin="org.eclipse.jface.text"/>
+      <import plugin="org.eclipse.core.filebuffers"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.ui.editors"/>
+      <import plugin="org.eclipse.ui.console"/>
+      <import plugin="org.eclipse.help"/>
+      <import plugin="org.apache.ant"/>
+      <import plugin="org.eclipse.ant.core"/>
+   </requires>
+
+   <plugin
+         id="com.tlcsdm.eclipse.ucdetector"
+         version="0.0.0"/>
+
+</feature>

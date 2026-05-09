@@ -1,0 +1,3 @@
+plugins/com.tlcsdm.eclipse.ucdetector/about.html        linguist-vendored
+plugins/com.tlcsdm.eclipse.ucdetector.additional/about.html        linguist-vendored
+plugins/com.tlcsdm.eclipse.ucdetector/help/**        linguist-vendored

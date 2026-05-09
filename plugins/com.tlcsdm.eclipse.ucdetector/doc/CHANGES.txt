@@ -1,0 +1,251 @@
+UCDetector 2.1.0 from XXX - eclipse >=4.2 (3.8):
+
+New features:
+ 
+Bugfixes:
+- Fixed missing QuickFix icons (https://sourceforge.net/p/ucdetector/bugs/82/)
+ 
+Changes:
+ - UCDetector needs java >= 1.6 or 1.8? -> See Manifest of org.eclipse plugins
+
+
+Todo:
+ - [ 3396900 ] Abstract classes' constructors can always be protected
+ - [ 3400167 ] Removed warnings: Restrict method/field visibility to class visibility
+ - Unused marker for code marked with javadoc @deprecated
+ - #48 Keyboard binding doesn't work, and can't be changed
+
+// -----------------------------------------------------------------------------
+UCDetector 2.0.0 from 2017-03-16 - eclipse >=3.5:
+
+New features:
+ - Improved tooltips for UCDetector preferences
+ - Improved messages, labels
+ - Added negative ignore filter
+ - Added dtd for xml reports
+ - Better debug log output for ignored elements
+
+ 
+Bugfixes:
+ - #70 Error in numeric literal with underscores
+ - #79 The image could not be loaded: info_tsk.gif, delete_obj.gif
+ - #49 Exclude in cycles javadoc references 
+
+ 
+Changes:
+ - UCDetector needs java >= 1.6
+ 
+// -----------------------------------------------------------------------------
+UCDetector 1.10.0 from 2012-04-05 - eclipse 3.4 - 3.8:
+New features:
+ - [ 3474895 ] Improved "// NO_UCD" quickfix
+ - Added UCDetector headless installer script for linux
+
+Bugfixes:
+ - [ 3474851 ] Bad handling of quickfixes on multi-selection
+ - [ 3438795 ] Ignore @Override methods
+ - Fixed UCDetector headless
+
+
+// -----------------------------------------------------------------------------
+UCDetector 1.9.0 from 2011-10-26 - eclipse 3.4-3.7:
+New features:
+ - [ 3323078 ] Added: startLine, endLine, fileName to xml report
+ - All preferences for headless mode are in ucdetector.options
+
+Bugfixes:
+ - UCDetector works now with "Eclipse IDE for Java Developers" (changed dependency org.eclipse.pde.core to "optional")
+ - Improved backwards compatibility: UCDetector works with eclipse 3.4 (3.3)
+ - [ 3396856 ] Fields in interfaces are already final
+
+// -----------------------------------------------------------------------------
+UCDetector 1.8.0 from 2011-06-15 - eclipse 3.5, 3.6, 3.7:
+New features:
+ - [ 3176780 ] New option: ignore "derived" files
+ - Improved layout for ignore preferences
+ - New build in detection mode "extreme" (no filter, show all kinds of warnings)
+ - UCDetector actions are now available for Working Sets
+ - New extension point 'com.tlcsdm.eclipse.ucdetector.reports' to create custom report using xslt or java
+ - Create custom report by renaming and changing __custom.xslt
+
+Bugfixes:
+ - Fixed broken filter '@SuppressWarnings("ucd") = false'
+ - Fixed NPE, when a compilation unit has no primary type
+ - Search class names in text file now works also for nested classes: com.example.Foo$NestedClass
+ - [ 3200043 ] Bad marker "test only" for classes used in xml file
+ - [ 3191417 ] Change to "protected" should be default
+
+// -----------------------------------------------------------------------------
+UCDetector 1.7.0 from 2011-02-04 - eclipse 3.5, 3.6, 3.7:
+New features:
+ - [ 3049290 ] Set target platform in headless mode
+ - Headless: Iterate over projects or resources. Use option file
+ - Better html report: Show icons, javadoc author, configure report file name
+ - Smaller xml report
+ - New "Delete file QuickFix" for unused classes
+ - New option "Filter classes with main method" default "false"
+
+Bugfixes:
+ - QuickFix was broken, when there are several classes in one java file
+ - UCDetector is fit for eclipse 3.7
+ - Visibility detection was broken for mode "classes only"
+ - [ 3124968 ] No private marker for enum methods/fields
+
+// -----------------------------------------------------------------------------
+UCDetector 1.6.0 from 2010-08-17:
+Bugfixes:
+ - fixed missing QuickFix icons
+ - [ 3025571 ] Exception loading modes: Malformed \uxxxx encoding
+ - [ 3046637 ] Headless fails to recognize projects
+ - Cancel broken in active mode, buttons: "Rename..." and "New..."
+
+New features:
+ - [ 2810803 ] Added again: Combobox to change all visibility combos
+ - [ 3014516 ] Search class name in file: Full AND simple
+ - New button: Rename mode
+ - New option: Log to Eclipse Console View
+
+// -----------------------------------------------------------------------------
+UCDetector 1.5.0 from 2010-06-10:
+Bugfixes:
+ - [ 2922801 ] Quick fix exception on enum declaration
+ - [ 2968753 ] protected abstract method cannot be made private
+ - [ 2986496 ] Marker don't disappear when deleting a complete line
+ - [ 2996487 ] Applying quick fix scrolls page
+ - [ 2996965 ] Property 'File name pattern to search': Trim whitespaces
+ - [ 2996537 ] Eclipse Plug-in/Extension detection: Added to default file pattern: MANIFEST.MF
+
+
+New features:
+ - [ 2929828 ] Added filter to exclude classes extending/implementing
+ - [ 2923567 ] Do not report markers for deprecated class members
+ - [ 2824564 ] Add detection setting profiles
+ - Added cycle detection again, improved cycle view
+ - Added new text report
+
+// -----------------------------------------------------------------------------
+UCDetector 1.4.0 from 2010-01-03:
+Bugfixes:
+ - [ PerformanceBug ] UCDetector is now 2 times faster, because SearchScope is sources now.
+ - [ 2911486 ] QuickFix doesn't modify code
+ - [ 2900561] Enum constant detection now also searches for values() and valueOf()
+
+New features:
+ - Improved QuickFixes
+ - Improved HTML/XML report
+ - Added a new TodoQuickFix
+
+// -----------------------------------------------------------------------------
+UCDetector 1.3.0 from 2009-10-25:
+Bugfixes:
+ - [ 2826205 ] Can't make interface methods final
+ - [ 2826216 ] Unused interface methods are not detected
+ - [ 2804064, 2865051, 2743908 ]
+              Access to enclosing type - make 2743908 configurable: Created new Checkbox
+ - [ 2864046 ] Ignore public methods of non-public classes
+-  [ 2864967 ] Ignore references for recursive methods
+
+New features:
+ - New preference: 'ignore Classes containing string'
+ - [ 2832790 ] Custom annotation filter
+
+// -----------------------------------------------------------------------------
+
+UCDetector 1.2.0 from 2009-07-21:
+Bugfixes:
+ - [ 2783734 ] Static imports are not recognized
+ - [ 2787576 ] Waiting for first 10 markers
+ - [ 2776029 ] Final for fields initialized in subclass constructors
+ - [ 2808853 ] Don't create "0 references marker" for classes with main methods
+ - [ 2811049 ] Html report is overridden each run
+ - [ 2810802 ] UCDetector crashes with an Exception
+ - [ 2804064 ] Access to enclosing type - make 2743908 configurable
+ - [ 2779970 ] Compile error for: static variable
+
+New features:
+ - Improved running UCDetector headless: More Options. Refresh/compile workspace
+ - Detect order changed: Detect a complete class, then detect next class
+ - Removed method/field detection of anonymous classes. Already done by eclipse, slow
+ - [ 2803618 ] Add number of references to report
+ - [ 2658675 ] Want annotations, not comments, to indicate non-dead code
+-  [ 2810803 ] Change visibility options more comfortable
+
+// -----------------------------------------------------------------------------
+UCDetector 1.1.0 from 2009-04-15:
+Bugfixes:
+ - [ 2743872 ] Don't check for constructors called only 1 time
+ - [ 2743908 ] Methods only called from inner class could be private
+ - [ 2762967 ] XmlReport: Problems running UCDetector
+
+// -----------------------------------------------------------------------------
+UCDetector 1.0.0 from 2009-04-03:
+New features:
+ - [ 2409697 ] Detect code only called from tests
+ - [ 2373808 ] Classes found by text search should have no markers
+ - [ 2490344 ] Filters options for visibility (fields, constants, methods)
+ - [ 2653112 ] UCDetector should run as a ant task in headless mode
+ - [ 2417657 ] QuickFix should behave as for Java problems (propose all occurrences)
+
+Bugfixes:
+ - [ 2373808 ] Classes found by text search should have no markers
+ - [ 2600845 ] UCDetector html report broken
+ - [ 2715348 ] Filter on Source folders does not work
+ - [ 2539795 ] Added marker warning for: Wrong default visibility marker for classes
+ - [ 2721955 ] On QuickFix the direct sibling marker gets deleted too
+
+// -----------------------------------------------------------------------------
+UCDetector 0.12.0 from 2008-11-25:
+New features:
+ - [ 2163715 ] eclipse update site: http://ucdetector.sourceforge.net/update
+ - [ 2290711 ] Detect write only fields
+ - [ 2180705 ] Look for just the class name without the package name
+ - Better messages for markers
+
+Bugfixes:
+ - [ 2153699 ] Find unused interface methods, unused abstract methods
+ - [ 2269486 ] Constants in Interfaces Can't be private
+ - [ 2225016 ] Don't create "0 references marker" for overridden methods
+
+// -----------------------------------------------------------------------------
+UCDetector 0.11.0 from 2008-09-30:
+New features:
+ - QuickFixes
+ - Checkbox "Ignore bean methods"
+ - When UCDetector is running, now it is possible to continue editing files in eclipse
+ - Speed up detection for overridden methods
+ - Feature request [ 2103460 ]: Split visibility detection in private and protected.
+ - Add warning message, if there are no elements found to run detection [ 2103655 ]
+
+Bugfixes:
+ - Don't suggest to change visibility of enums constants
+ - Fix Bug [ 2103382 ] Method filter not saved in preference page
+ - Fix Bug [ 2103678 ] Unnecessary code doesn't recurse in sub packages
+ - Fix Bug [ 2103655 ] Detect cycles does not show anything
+ - Fix Bug [ 2123103 ] Don't suggest to make constructors final
+
+// -----------------------------------------------------------------------------
+UCDetector 0.10.0 from 2008-09-04:
+New features:
+ - Filter for methods and fields
+ - Final detection for methods and fields
+ - Search of full qualifies class name in text files
+ - Create html and xml report
+ - Marker for default visibility
+ - Different icons for private, protected, default and public
+ - Tooltips in preference page
+ - Show help for OutOfMemoryError'
+Bugfixes:
+ - Don't try to make normal classes private
+ - Different icons for private, protected, default and public
+ - Ignore serialization methods and fields like: serialVersionUID
+ - Add example plugin to write your own detection: com.tlcsdm.eclipse.ucdetector.additional
+ - Ignore methods which override or implement other methods
+ - Ignore methods which are overridden
+ - Ignore interfaces
+ - Ignore abstract methods
+
+
+// -----------------------------------------------------------------------------
+UCDetector 0.9.0 from 2008-03-01:
+ - first version
+

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contexts>
+   <context id="ucd_context_id">
+      <description>UCDetector Unnecessary Code Detector.</description>
+      <topic href="http://www.ucdetector.org/index.html" label="UCDetector (online)" />
+   </context>
+   <context id="ucd_context_id_preferences">
+      <description>UCDetector preferences</description>
+      <topic href="http://www.ucdetector.org/preferences.html" label="Preferences (online)" />
+   </context>
+</contexts>

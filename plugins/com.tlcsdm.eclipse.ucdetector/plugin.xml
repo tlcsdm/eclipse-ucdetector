@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="4.2"?>
+<plugin>
+  <!-- =====================================================================
+       EXTENSIONS 
+       ===================================================================== -->
+   <extension-point id="reports" name="%extension-point.name" schema="schema/reports.exsd"/>
+   <extension-point id="headless" name="%extension-point.headless.name" schema="schema/headless.exsd"/>
+  
+  <!-- =====================================================================
+       PREFERENCE PAGE 
+       ===================================================================== -->
+  <extension point="org.eclipse.ui.preferencePages">
+    <page name="%preferencePages.name"
+        class="com.tlcsdm.eclipse.ucdetector.preferences.UCDetectorPreferencePage"
+        id="com.tlcsdm.eclipse.ucdetector.preferences.PreferencePage.tlcsdm">
+    </page>
+    <!--
+    <page name="%preferencePages.name.keywords"
+	      class="com.tlcsdm.eclipse.ucdetector.preferences.UCDetectorPreferencePageKeywords"
+        id="com.tlcsdm.eclipse.ucdetector.preferences.UCDetectorPreferencePageKeywords"
+		    category="com.tlcsdm.eclipse.ucdetector.preferences.PreferencePage">
+   	</page>
+   	-->
+  </extension>
+
+  <!-- =====================================================================
+       PREFERENCES
+       ===================================================================== -->
+  <extension point="org.eclipse.core.runtime.preferences">
+    <initializer class="com.tlcsdm.eclipse.ucdetector.preferences.PreferenceInitializer"/>
+  </extension>
+  
+  <!-- =====================================================================
+       POP UP - JAVA ELEMENTS
+       ===================================================================== -->
+  <extension point="org.eclipse.ui.popupMenus">
+    <objectContribution
+        adaptable="true"
+        objectClass="org.eclipse.jdt.core.IJavaElement"
+        id="com.tlcsdm.eclipse.ucdetector.popupMenus.project">
+      <menu label="%popupMenus.root"
+          path="additions"
+          id="ucdetectorGroupTlcsdm">
+      </menu>
+
+    <!-- COUNT ============================ -->
+    <action class="com.tlcsdm.eclipse.ucdetector.action.CountAction"
+        enablesFor="+"
+        id="com.tlcsdm.eclipse.ucdetector.CountAction"
+        label="%CountAction.label"
+        tooltip="%CountAction.tooltip"
+        icon="icons/info_tsk.gif"
+        menubarPath="ucdetectorGroupTlcsdm/ucdetector"/>
+    
+    <!-- CLEAN MARKERS ============================ -->
+    <action class="com.tlcsdm.eclipse.ucdetector.action.CleanMarkersAction"
+        enablesFor="+"
+        id="com.tlcsdm.eclipse.ucdetector.CleanMarkersAction"
+        label="%CleanMarkersAction.label"
+        tooltip="%CleanMarkersAction.tooltip"
+        icon="icons/delete_obj.gif"
+        menubarPath="ucdetectorGroupTlcsdm/ucdetector"/>
+
+    <!-- DETECT UC ============================ -->
+    <action class="com.tlcsdm.eclipse.ucdetector.action.UCDetectorAction"
+        enablesFor="+"
+        id="com.tlcsdm.eclipse.ucdetector.SearchAction"
+        label="%DetectAction.label"
+        tooltip="%DetectAction.tooltip"
+        icon="$nl$/icons/ucd.gif"
+        menubarPath="ucdetectorGroupTlcsdm/ucdetector"
+        definitionId="com.tlcsdm.eclipse.ucdetector.definitionId.ucd"/>
+
+    <!-- DETECT CYCLE ============================ -->
+    <action class="com.tlcsdm.eclipse.ucdetector.cycle.CycleAction"
+        enablesFor="+"
+        id="com.tlcsdm.eclipse.ucdetector.cycle.CycleAction"
+        label="%CycleAction.label"
+        tooltip="%CycleAction.tooltip"
+        icon="icons/cycle.gif"
+        menubarPath="ucdetectorGroupTlcsdm/cycle"/>
+    </objectContribution>
+  </extension>
+
+
+  <!-- =====================================================================
+       POP UP - WORKING SETS
+       ===================================================================== -->
+  <extension point="org.eclipse.ui.popupMenus">
+    <objectContribution
+        adaptable="true"
+        objectClass="org.eclipse.ui.IWorkingSet"
+        id="com.tlcsdm.eclipse.ucdetector.popupMenus.projectWorkingSet">
+      <menu label="%popupMenus.root"
+          path="additions"
+          id="ucdetectorGroupTlcsdm">
+      </menu>
+
+    <!-- COUNT ============================ -->
+    <action class="com.tlcsdm.eclipse.ucdetector.action.CountAction"
+        enablesFor="+"
+        id="com.tlcsdm.eclipse.ucdetector.CountActionWorkingSet"
+        label="%CountAction.label"
+        tooltip="%CountAction.tooltip"
+        icon="icons/info_tsk.gif"
+        menubarPath="ucdetectorGroupTlcsdm/ucdetector"/>
+    
+    <!-- CLEAN MARKERS ============================ -->
+    <action class="com.tlcsdm.eclipse.ucdetector.action.CleanMarkersAction"
+        enablesFor="+"
+        id="com.tlcsdm.eclipse.ucdetector.CleanMarkersActionWorkingSet"
+        label="%CleanMarkersAction.label"
+        tooltip="%CleanMarkersAction.tooltip"
+        icon="icons/delete_obj.gif"
+        menubarPath="ucdetectorGroupTlcsdm/ucdetector"/>
+
+    <!-- DETECT UC ============================ -->
+    <action class="com.tlcsdm.eclipse.ucdetector.action.UCDetectorAction"
+        enablesFor="+"
+        id="com.tlcsdm.eclipse.ucdetector.SearchActionWorkingSet"
+        label="%DetectAction.label"
+        tooltip="%DetectAction.tooltip"
+        icon="$nl$/icons/ucd.gif"
+        menubarPath="ucdetectorGroupTlcsdm/ucdetector"/>
+
+    <!-- DETECT CYCLE ============================ -->
+    <action class="com.tlcsdm.eclipse.ucdetector.cycle.CycleAction"
+        enablesFor="+"
+        id="com.tlcsdm.eclipse.ucdetector.cycle.CycleActionWorkingSet"
+        label="%CycleAction.label"
+        tooltip="%CycleAction.tooltip"
+        icon="icons/cycle.gif"
+        menubarPath="ucdetectorGroupTlcsdm/cycle"/>
+    </objectContribution>
+  </extension>
+    
+  <!-- =====================================================================
+       COMMAND+BINDINGS to declare shortcut  Alt+Shift+U
+       2017-03-31: Removed: Does not work. Needs commands instead of actions
+       ===================================================================== 
+	<extension point="org.eclipse.ui.commands"> 
+		<command name="%command.name.0" 
+		       id="com.tlcsdm.eclipse.ucdetector.definitionId.ucd"> 
+		</command>
+	</extension>
+	<extension point="org.eclipse.ui.bindings" name="%extension.name.0"> 
+    <key commandId="com.tlcsdm.eclipse.ucdetector.definitionId.ucd" 
+         contextId="org.eclipse.ui.contexts.window" 
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" 
+         sequence="M2+M3+U"
+         /> 
+  </extension>
+  -->
+
+  <!-- =====================================================================
+       MARKER
+       ===================================================================== -->
+  <!-- base see also attributes in: eclipse-3.5\plugins\org.eclipse.jdt.core_3.5.0.v_771.jar -->
+  <!-- *** 1 *** -->
+  <extension
+      id="com.tlcsdm.eclipse.ucdetector.analyzeMarker"
+      name="%extension.name.1"
+      point="org.eclipse.core.resources.markers">
+    <persistent value="true"/>
+    <super type="org.eclipse.core.resources.problemmarker"/>
+    <super type="org.eclipse.core.resources.textmarker"/>
+  </extension>
+  <!-- References -->
+  <extension
+      id="com.tlcsdm.eclipse.ucdetector.analyzeMarkerReference"
+      name="%extension.name.2"
+      point="org.eclipse.core.resources.markers">
+    <super type="org.eclipse.core.resources.problemmarker"/>
+    <super type="org.eclipse.core.resources.textmarker"/>
+    <super type="com.tlcsdm.eclipse.ucdetector.analyzeMarker"/>
+    <persistent
+        value="true"></persistent>
+  </extension>
+  <!-- Few references -->
+  <extension
+      id="com.tlcsdm.eclipse.ucdetector.analyzeMarkerFewReference"
+      name="%extension.name.3"
+      point="org.eclipse.core.resources.markers">
+    <super type="org.eclipse.core.resources.problemmarker"/>
+    <super type="org.eclipse.core.resources.textmarker"/>
+    <super type="com.tlcsdm.eclipse.ucdetector.analyzeMarker"/>
+    <persistent
+        value="true"></persistent>
+  </extension>
+   <!-- visibility -->
+  <extension
+      id="com.tlcsdm.eclipse.ucdetector.analyzeMarkerVisibilityPrivate"
+      name="%extension.name.4"
+      point="org.eclipse.core.resources.markers">
+    <super type="org.eclipse.core.resources.problemmarker"/>
+    <super type="org.eclipse.core.resources.textmarker"/>
+    <super type="com.tlcsdm.eclipse.ucdetector.analyzeMarker"/>
+    <persistent  value="true"></persistent>
+  </extension>
+  <extension
+      id="com.tlcsdm.eclipse.ucdetector.analyzeMarkerVisibilityProtected"
+      name="%extension.name.5"
+      point="org.eclipse.core.resources.markers">
+    <super type="org.eclipse.core.resources.problemmarker"/>
+    <super type="org.eclipse.core.resources.textmarker"/>
+    <super type="com.tlcsdm.eclipse.ucdetector.analyzeMarker"/>
+    <persistent  value="true"></persistent>
+  </extension>
+  <extension
+      id="com.tlcsdm.eclipse.ucdetector.analyzeMarkerVisibilityDefault"
+      name="%extension.name.6"
+      point="org.eclipse.core.resources.markers">
+    <super type="org.eclipse.core.resources.problemmarker"/>
+    <super type="org.eclipse.core.resources.textmarker"/>
+    <super type="com.tlcsdm.eclipse.ucdetector.analyzeMarker"/>
+    <persistent  value="true"></persistent>
+  </extension>
+   <!-- final -->
+  <extension
+      id="com.tlcsdm.eclipse.ucdetector.analyzeMarkerFinal"
+      name="%extension.name.7"
+      point="org.eclipse.core.resources.markers">
+    <super type="org.eclipse.core.resources.problemmarker"/>
+    <super type="org.eclipse.core.resources.textmarker"/>
+    <super type="com.tlcsdm.eclipse.ucdetector.analyzeMarker"/>
+    <persistent  value="true"></persistent>
+  </extension>
+   <!-- analyzeTestOnly -->
+  <extension
+      id="com.tlcsdm.eclipse.ucdetector.analyzeMarkerTestOnly"
+      name="%extension.name.8"
+      point="org.eclipse.core.resources.markers">
+    <super type="org.eclipse.core.resources.problemmarker"/>
+    <super type="org.eclipse.core.resources.textmarker"/>
+    <super type="com.tlcsdm.eclipse.ucdetector.analyzeMarker"/>
+    <persistent  value="true"></persistent>
+  </extension>
+  <!-- other -->
+  <extension
+      id="com.tlcsdm.eclipse.ucdetector.analyzeMarkerOther"
+      name="%extension.name.9"
+      point="org.eclipse.core.resources.markers">
+    <super type="org.eclipse.core.resources.problemmarker"/>
+    <super type="org.eclipse.core.resources.textmarker"/>
+    <super type="com.tlcsdm.eclipse.ucdetector.analyzeMarker"/>
+    <persistent  value="true"></persistent>
+  </extension>
+  
+   <!-- ucd icon -->
+    <!-- *** 2 *** -->
+  <extension point="org.eclipse.ui.editors.annotationTypes">
+    <!-- Reference -->
+    <type
+        name="com.tlcsdm.eclipse.ucdetector.analyzeAnnotationReference"
+        super="org.eclipse.ui.workbench.texteditor.warning"
+        markerType="com.tlcsdm.eclipse.ucdetector.analyzeMarkerReference"/>
+    <!-- few references -->
+    <type
+        name="com.tlcsdm.eclipse.ucdetector.analyzeAnnotationFewReference"
+        super="org.eclipse.ui.workbench.texteditor.warning"
+        markerType="com.tlcsdm.eclipse.ucdetector.analyzeMarkerFewReference"/>
+    <!-- visibility -->
+    <type
+        name="com.tlcsdm.eclipse.ucdetector.analyzeAnnotationVisibilityPrivate"
+        super="org.eclipse.ui.workbench.texteditor.warning"
+        markerType="com.tlcsdm.eclipse.ucdetector.analyzeMarkerVisibilityPrivate"/>
+    <type
+        name="com.tlcsdm.eclipse.ucdetector.analyzeAnnotationVisibilityProtected"
+        super="org.eclipse.ui.workbench.texteditor.warning"
+        markerType="com.tlcsdm.eclipse.ucdetector.analyzeMarkerVisibilityProtected"/>
+    <type
+        name="com.tlcsdm.eclipse.ucdetector.analyzeAnnotationVisibilityDefault"
+        super="org.eclipse.ui.workbench.texteditor.warning"
+        markerType="com.tlcsdm.eclipse.ucdetector.analyzeMarkerVisibilityDefault"/>
+    <!-- final -->
+    <type
+        name="com.tlcsdm.eclipse.ucdetector.analyzeAnnotationFinal"
+        super="org.eclipse.ui.workbench.texteditor.warning"
+        markerType="com.tlcsdm.eclipse.ucdetector.analyzeMarkerFinal"/>
+    <!-- test only -->
+    <type
+        name="com.tlcsdm.eclipse.ucdetector.analyzeAnnotationTestOnly"
+        super="org.eclipse.ui.workbench.texteditor.warning"
+        markerType="com.tlcsdm.eclipse.ucdetector.analyzeMarkerTestOnly"/>
+  </extension>
+  
+  <!-- *** 3 *** -->
+  <!-- ICONS SEE ALSO: UCDetectorPlugin.initializeImageRegistry() -->
+  <extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+    <!-- references -->
+    <specification
+        annotationType="com.tlcsdm.eclipse.ucdetector.analyzeAnnotationReference"
+        icon="icons/Reference.gif"
+        quickFixIcon="icons/Reference.gif"
+        includeOnPreferencePage="true"
+        label="%specification.label.references"/>
+    <!-- few references -->
+    <specification
+        annotationType="com.tlcsdm.eclipse.ucdetector.analyzeAnnotationFewReference"
+        icon="icons/FewReference.gif"
+        includeOnPreferencePage="true"
+        label="%specification.label.few.references"/>
+    <!-- visibility -->
+    <specification
+        annotationType="com.tlcsdm.eclipse.ucdetector.analyzeAnnotationVisibilityPrivate"
+        icon="icons/VisibilityPrivate.gif"
+        quickFixIcon="icons/VisibilityPrivate.gif"
+        includeOnPreferencePage="true"
+        label="%specification.label.private"/>
+    <specification
+        annotationType="com.tlcsdm.eclipse.ucdetector.analyzeAnnotationVisibilityProtected"
+        icon="icons/VisibilityProtected.gif"
+        quickFixIcon="icons/VisibilityProtected.gif"
+        includeOnPreferencePage="true"
+        label="%specification.label.protected"/>
+    <specification
+        annotationType="com.tlcsdm.eclipse.ucdetector.analyzeAnnotationVisibilityDefault"
+        icon="icons/VisibilityDefault.gif"
+        quickFixIcon="icons/VisibilityDefault.gif"
+        includeOnPreferencePage="true"
+        highlightPreferenceValue="true"
+        label="%specification.label.default"/>
+    <!-- -->
+    <specification
+        annotationType="com.tlcsdm.eclipse.ucdetector.analyzeAnnotationFinal"
+        icon="icons/Final.gif"
+        quickFixIcon="icons/Final.gif"
+        includeOnPreferencePage="true"
+        label="%specification.label.final"/>
+    <!-- -->
+    <specification
+        annotationType="com.tlcsdm.eclipse.ucdetector.analyzeAnnotationTestOnly"
+        icon="icons/TestOnly.gif"
+        quickFixIcon="icons/TestOnly.gif"
+        includeOnPreferencePage="true"
+        label="%specification.label.test.only"/>
+  </extension>
+
+  <!-- =====================================================================
+       QUICK FIX
+       ===================================================================== -->
+  <!-- http://wiki.eclipse.org/FAQ_How_do_I_implement_Quick_Fixes_for_my_own_language%3F   -->
+  <extension point="org.eclipse.ui.ide.markerResolution">
+    <markerResolutionGenerator
+     markerType="com.tlcsdm.eclipse.ucdetector.analyzeMarkerReference"
+     class="com.tlcsdm.eclipse.ucdetector.quickfix.UCDQuickGenerator"/>
+  </extension>
+  <extension point="org.eclipse.ui.ide.markerResolution">
+    <markerResolutionGenerator
+     markerType="com.tlcsdm.eclipse.ucdetector.analyzeMarkerTestOnly"
+     class="com.tlcsdm.eclipse.ucdetector.quickfix.UCDQuickGenerator"/>
+  </extension>
+  <!-- no quickFix for few references
+  <extension point="org.eclipse.ui.ide.markerResolution">
+    <markerResolutionGenerator
+     markerType="com.tlcsdm.eclipse.ucdetector.analyzeMarkerFewReference"
+     class="com.tlcsdm.eclipse.ucdetector.quickfix.UCDQuickGenerator"/>
+  </extension> -->
+  <extension point="org.eclipse.ui.ide.markerResolution">
+    <markerResolutionGenerator
+     markerType="com.tlcsdm.eclipse.ucdetector.analyzeMarkerFinal"
+     class="com.tlcsdm.eclipse.ucdetector.quickfix.UCDQuickGenerator"/>
+  </extension>
+   
+  <extension point="org.eclipse.ui.ide.markerResolution">
+    <markerResolutionGenerator
+     markerType="com.tlcsdm.eclipse.ucdetector.analyzeMarkerVisibilityPrivate"
+     class="com.tlcsdm.eclipse.ucdetector.quickfix.UCDQuickGenerator"/>
+  </extension>
+  <extension point="org.eclipse.ui.ide.markerResolution">
+    <markerResolutionGenerator
+     markerType="com.tlcsdm.eclipse.ucdetector.analyzeMarkerVisibilityProtected"
+     class="com.tlcsdm.eclipse.ucdetector.quickfix.UCDQuickGenerator"/>
+  </extension>
+  <extension point="org.eclipse.ui.ide.markerResolution">
+    <markerResolutionGenerator
+     markerType="com.tlcsdm.eclipse.ucdetector.analyzeMarkerVisibilityDefault"
+     class="com.tlcsdm.eclipse.ucdetector.quickfix.UCDQuickGenerator"/>
+  </extension>
+
+  <!-- =====================================================================
+       HELP.TOC
+       ===================================================================== -->
+  <extension point="org.eclipse.help.toc">
+    <toc file="help/toc.xml" primary="true"></toc>
+  </extension>
+
+  <!-- =====================================================================
+       HELP.CONTEXTS
+       ===================================================================== -->
+  <extension point="org.eclipse.help.contexts">
+    <contexts file="help/contexts.xml" plugin="com.tlcsdm.eclipse.ucdetector"></contexts>
+  </extension>
+
+  <!-- =====================================================================
+       CYCLE VIEW
+       ===================================================================== -->
+   <extension point="org.eclipse.ui.views">
+      <category  name="%category.name.CycleView" id="com.tlcsdm.eclipse.ucdetector.cycle.CycleView">
+      </category>
+      <view name="%view.name.CycleView"
+            icon="icons/cycle.gif"
+            category="com.tlcsdm.eclipse.ucdetector.cycle.CycleView"
+            class="com.tlcsdm.eclipse.ucdetector.cycle.CycleView"
+            id="com.tlcsdm.eclipse.ucdetector.cycle.view.CycleView">
+      </view>
+   </extension>
+   
+  <!-- =====================================================================
+       INTRO
+       http://www.eclipse.org/eclipse/platform-ua/proposals/shared-intro/shared-intro.htm#enhancements
+       ===================================================================== -->
+  <extension point="org.eclipse.ui.intro.configExtension">
+     <configExtension 
+           configId="org.eclipse.ui.intro.universalConfig"
+           content="welcome.xml" >
+     </configExtension>
+     <theme default="false"
+           id="com.tlcsdm.eclipse.ucdetector.theme"
+           name="%theme.name.0"
+           path="."
+           previewImage="icons/ucd.gif">
+           <property name="launchbarOverviewIcon" value="icons/ucdetector32.png"/>
+     </theme>
+  </extension>
+
+  <!-- =====================================================================
+       CONSOLE
+       ===================================================================== -->
+    <extension point="org.eclipse.ui.console.consoleFactories">
+       <consoleFactory
+             class="com.tlcsdm.eclipse.ucdetector.UCDetectorConsole$UCDetectorConsoleFactory"
+             icon="icons/ucd.gif"
+             label="%consoleFactory.label">
+       </consoleFactory>
+    </extension>
+    <extension point="org.eclipse.ui.console.consolePageParticipants">
+       <consolePageParticipant
+             class="com.tlcsdm.eclipse.ucdetector.UCDetectorConsole$UCDetectorConsolePageParticipant"
+             id="com.tlcsdm.eclipse.ucdetector.consolePageParticipant">
+          <enablement>
+             <instanceof
+                   value="com.tlcsdm.eclipse.ucdetector.UCDetectorConsole">
+             </instanceof></enablement>
+       </consolePageParticipant>
+    </extension>
+
+  <!-- =====================================================================
+       APPLICATIONS
+       ===================================================================== -->
+    <extension point="org.eclipse.core.runtime.applications" id="detect">
+       <application visible="false">
+          <run class="com.tlcsdm.eclipse.ucdetector.headless.UCDApplication"></run>
+       </application>
+    </extension>
+
+  <!-- =====================================================================
+       UCDETECTOR REPORTS
+       ===================================================================== -->
+    <extension point="com.tlcsdm.eclipse.ucdetector.reports">
+       <report resultFile="${reportName}_custom.txt" description="%report.custom.name" id="custom" stylesheet="org/ucdetector/report/custom.xslt"></report>
+       <report resultFile="${reportName}.html" description="%report.html.name" id="html" stylesheet="org/ucdetector/report/html.xslt"></report>
+       <report resultFile="${reportName}.txt" description="%report.text.name" id="text" class="com.tlcsdm.eclipse.ucdetector.report.TextReport" ></report>
+    </extension>
+</plugin>
