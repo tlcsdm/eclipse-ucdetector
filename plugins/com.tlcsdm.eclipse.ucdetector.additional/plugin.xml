@@ -2,43 +2,53 @@
 <?eclipse version="3.5"?>
 <plugin>
   <!-- ===================================================================== -->
-  <!-- POP UP                                                                -->
+  <!-- COMMANDS / HANDLERS / MENUS                                           -->
   <!-- ===================================================================== -->
-	<extension point="org.eclipse.ui.popupMenus">
-		<objectContribution	adaptable="true"
-				objectClass="org.eclipse.jdt.core.IJavaElement"
-				id="com.tlcsdm.eclipse.ucdetector.popupMenus.project">
-			<menu label="%popupMenus.root"
-					path="additions"
-					id="ucdetectorGroup">
-			</menu>
-		</objectContribution>
-
-        <!-- Example -->
-		<objectContribution	adaptable="true"
-				id="com.tlcsdm.eclipse.ucdetector.popupMenus.project.Analyze"
-				objectClass="org.eclipse.jdt.core.IJavaElement">
-			<action class="com.tlcsdm.eclipse.ucdetector.action.ExampleAction"
-				enablesFor="+"
-				id="com.tlcsdm.eclipse.ucdetector.action.ExampleAction"
-				label="%ExampleAction.label"
-				tooltip="%ExampleAction.tooltip"
-				icon="$nl$/icons/example.gif"
-				menubarPath="ucdetectorGroup/additional"/>
-		</objectContribution>
-		<!-- CheckUcdMarker -->
-		<objectContribution adaptable="true"
-		      id="com.tlcsdm.eclipse.ucdetector.popupMenus.project.Analyze"
-		      objectClass="org.eclipse.jdt.core.IJavaElement">
-			<action class="com.tlcsdm.eclipse.ucdetector.action.CheckUcdMarkerAction"
-				enablesFor="+"
-				icon="$nl$/icons/help_search.gif"
-				id="com.tlcsdm.eclipse.ucdetector.action.CheckUcdMarkerAction"
-				label="%check.ucd.action.label"
-				menubarPath="ucdetectorGroup/additional">
-			</action>
-		</objectContribution>
+	<extension point="org.eclipse.ui.commands">
+		<command
+			id="com.tlcsdm.eclipse.ucdetector.additional.command.example"
+			name="%ExampleAction.label"
+			description="%ExampleAction.tooltip"
+			categoryId="com.tlcsdm.eclipse.ucdetector.commands.category"/>
+		<command
+			id="com.tlcsdm.eclipse.ucdetector.additional.command.checkUcdMarker"
+			name="%check.ucd.action.label"
+			description="%check.ucd.action.label"
+			categoryId="com.tlcsdm.eclipse.ucdetector.commands.category"/>
 	</extension>
+
+	<extension point="org.eclipse.ui.handlers">
+		<handler
+			commandId="com.tlcsdm.eclipse.ucdetector.additional.command.example"
+			class="com.tlcsdm.eclipse.ucdetector.action.ExampleHandler">
+			<enabledWhen>
+				<reference definitionId="com.tlcsdm.eclipse.ucdetector.expressions.javaElementOrWorkingSetSelected"/>
+			</enabledWhen>
+		</handler>
+		<handler
+			commandId="com.tlcsdm.eclipse.ucdetector.additional.command.checkUcdMarker"
+			class="com.tlcsdm.eclipse.ucdetector.action.CheckUcdMarkerHandler">
+			<enabledWhen>
+				<reference definitionId="com.tlcsdm.eclipse.ucdetector.expressions.javaElementOrWorkingSetSelected"/>
+			</enabledWhen>
+		</handler>
+	</extension>
+
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:com.tlcsdm.eclipse.ucdetector.popupMenu?after=additions"
+			allPopups="true">
+			<command
+				commandId="com.tlcsdm.eclipse.ucdetector.additional.command.example"
+				icon="$nl$/icons/example.gif"
+				style="push"/>
+			<command
+				commandId="com.tlcsdm.eclipse.ucdetector.additional.command.checkUcdMarker"
+				icon="$nl$/icons/help_search.gif"
+				style="push"/>
+		</menuContribution>
+	</extension>
+
 
   <!-- ===================================================================== -->
   <!-- MARKER                                                                -->

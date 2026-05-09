@@ -20,7 +20,14 @@ This project is a fork of the original [UCDetector](https://sourceforge.net/proj
 
 In-product documentation is available in Eclipse via **Help > Help Contents > UCDetector**.
 
-## Modules
+## History
+
+UCDetector was originally created by Jörg Spieler and distributed from http://www.ucdetector.org/index.html. This fork keeps the original UCDetector project information and license attribution while updating the project structure and compatibility baseline.
+
+* 2.1.0: refactored to the `com.tlcsdm.eclipse.ucdetector` namespace, moved to a pomless Tycho layout, and raised the baseline to Java 17 + Eclipse 2024-06.
+* 2.0.x and earlier: see [`CHANGELOG.md`](CHANGELOG.md) for the original change history.
+
+## Project Structure
 
 * `plugins/com.tlcsdm.eclipse.ucdetector` - the main UCDetector plug-in.
 * `plugins/com.tlcsdm.eclipse.ucdetector.additional` - an example plug-in that shows how to develop a custom detector on top of UCDetector. Use it as a template when you want to add your own detection rules, markers, actions and quick fixes.
@@ -47,13 +54,6 @@ The `launches/` folder contains ready-to-use Eclipse launch configurations (`UCD
 
 1. Add `https://raw.githubusercontent.com/tlcsdm/eclipse-ucdetector/update_site/` as the update site in Eclipse.
 2. Download the generated update site archive from CI/release artifacts and install it as a local update site.
-
-## History
-
-UCDetector was originally created by Jörg Spieler and distributed from http://www.ucdetector.org/index.html. This fork keeps the original UCDetector project information and license attribution while updating the project structure and compatibility baseline.
-
-* 2.1.0: refactored to the `com.tlcsdm.eclipse.ucdetector` namespace, moved to a pomless Tycho layout, and raised the baseline to Java 17 + Eclipse 2024-06.
-* 2.0.x and earlier: see [`CHANGELOG.md`](CHANGELOG.md) for the original change history.
 
 ## License
 
