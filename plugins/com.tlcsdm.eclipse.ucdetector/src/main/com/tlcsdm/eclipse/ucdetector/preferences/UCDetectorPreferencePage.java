@@ -167,6 +167,8 @@ import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
+import org.eclipse.osgi.util.NLS;
+import com.tlcsdm.eclipse.ucdetector.Messages;
 import org.eclipse.ui.PlatformUI;
 import com.tlcsdm.eclipse.ucdetector.Log;
 import com.tlcsdm.eclipse.ucdetector.Log.LogLevel;
@@ -229,7 +231,7 @@ public class UCDetectorPreferencePage extends FieldEditorPreferencePage implemen
   @Override
   public void createFieldEditors() {
     Composite parentGroups = createComposite(getFieldEditorParent(), 1, 1, GridData.FILL_BOTH);
-    setTitle("UCDetector " + UCDInfo.getUCDVersion()); //$NON-NLS-1$
+    setTitle(NLS.bind(Messages.PreferencePage_Title, UCDInfo.getUCDVersion()));
     modesPanel = new ModesPanel(this, parentGroups);
     tabFolder = new TabFolder(parentGroups, SWT.NONE);
     tabFolder.setLayoutData(createGridData(500, SWT.DEFAULT, SWT.FILL, SWT.CENTER, true, false));
@@ -400,7 +402,7 @@ public class UCDetectorPreferencePage extends FieldEditorPreferencePage implemen
     Composite spacer = createGroup(parentGroups, PreferencePage_GroupReports);
     appendBool(REPORT_CREATE_XML, PreferencePage_CreateXmlReport, null, spacer, 3);
     for (ReportExtension extension : ReportExtension.getAllExtensions()) {
-      String text = String.format("Create %s report", extension.getDescription()); //$NON-NLS-1$
+      String text = NLS.bind(Messages.PreferencePage_CreateReport, extension.getDescription());
       appendBool(getReportStoreKey(extension), text, null, spacer, 3);
     }
 
@@ -434,16 +436,16 @@ public class UCDetectorPreferencePage extends FieldEditorPreferencePage implemen
     combo.getLabelControl(spacer).setToolTipText(PreferencePage_LogLevelToolTip);
     appendBool(LOG_TO_ECLIPSE, PreferencePage_LogToEclipse, PreferencePage_LogToEclipseToolTip, spacer, 2);
 
-    Composite spacerFiles = createGroup(parentGroups, "Files and directories:"); //$NON-NLS-1$
+    Composite spacerFiles = createGroup(parentGroups, Messages.PreferencePage_FilesAndDirectories);
     //    addLineHack(spacer, null);
     //    addLineHack(spacer, "Files and directories:"); //$NON-NLS-1$
     // @formatter:off
     File modesDir = UCDetectorPlugin.getModesDir();
-    appendLabelAndText(spacerFiles, "Reports"     , ReportNameManager.getReportDir(true));//$NON-NLS-1$
-    appendLabelAndText(spacerFiles, "Modes"       , modesDir.getAbsolutePath()          );//$NON-NLS-1$
-    appendLabelAndText(spacerFiles, "Eclipse home", UCDInfo.getEclipseHome()            );//$NON-NLS-1$
-    appendLabelAndText(spacerFiles, "Log file"    , UCDInfo.getLogfile()                );//$NON-NLS-1$
-    appendLabelAndText(spacerFiles, "Workspace"   , UCDInfo.getWorkspace()              );//$NON-NLS-1$
+    appendLabelAndText(spacerFiles, Messages.PreferencePage_FilesReports    , ReportNameManager.getReportDir(true));
+    appendLabelAndText(spacerFiles, Messages.PreferencePage_FilesModes      , modesDir.getAbsolutePath()          );
+    appendLabelAndText(spacerFiles, Messages.PreferencePage_FilesEclipseHome, UCDInfo.getEclipseHome()            );
+    appendLabelAndText(spacerFiles, Messages.PreferencePage_FilesLogFile    , UCDInfo.getLogfile()                );
+    appendLabelAndText(spacerFiles, Messages.PreferencePage_FilesWorkspace   , UCDInfo.getWorkspace()              );
     // @formatter:on
   }
 

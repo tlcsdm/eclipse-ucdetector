@@ -60,7 +60,7 @@ public class UCDetectorConsole extends MessageConsole {
       IConsoleManager consoleManager = ConsolePlugin.getDefault().getConsoleManager();
       boolean exists = false;
       if (console == null) {
-        console = new UCDetectorConsole("UCDetector Console", null, true); //$NON-NLS-1$
+        console = new UCDetectorConsole(Messages.UCDetectorConsole_Name, null, true);
 
         MessageConsoleStream infoStream = console.newMessageStream();
         infoStream.setColor(Display.getDefault().getSystemColor(SWT.COLOR_BLACK));
@@ -97,7 +97,7 @@ public class UCDetectorConsole extends MessageConsole {
     public void init(IPageBookViewPage page, IConsole unused) {
       // See: com.tlcsdm.eclipse.ucdetector.cycle.CycleView.removeSelectedMatches
       Action removeAction = new RemoveAction();
-      removeAction.setText("Close UCDetector console"); //$NON-NLS-1$
+      removeAction.setText(Messages.UCDetectorConsole_Close);
       SearchPluginImages.setImageDescriptors(removeAction, SearchPluginImages.T_LCL,
           SearchPluginImages.IMG_LCL_SEARCH_REM);
       IActionBars bars = page.getSite().getActionBars();

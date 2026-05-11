@@ -54,7 +54,7 @@ class ModesPanel {
 
     String toStringLocalized() {
       // Reflection!
-      return Messages.getString("ModesPanel_mode_" + name(), name()) + " [built-in]"; //$NON-NLS-1$ //$NON-NLS-2$
+      return NLS.bind(Messages.ModesPanel_ModeBuiltInLabel, Messages.getString("ModesPanel_mode_" + name(), name())); //$NON-NLS-1$
     }
   }
 
@@ -176,7 +176,7 @@ class ModesPanel {
 
   /** Add a user specific mode, and save it to a file */
   private void activeModeAdd() {
-    String newName = "CopyOf_" + getActiveModeName(); //$NON-NLS-1$
+    String newName = NLS.bind(Messages.ModesPanel_ModeCopyOf, getActiveModeName());
     InputDialog input = new InputDialog(parent.getShell(),//
         Messages.ModesPanel_ModeNewTitle,//
         Messages.ModesPanel_ModeName,//
@@ -252,8 +252,8 @@ class ModesPanel {
   protected void createMyMode() {
     String version = Prefs.getStore().getString(Prefs.PREFS_VERSION);
     if (version.length() == 0) {
-      Log.info("Adding mode: MyMode"); //$NON-NLS-1$
-      addMode("MyMode"); //$NON-NLS-1$
+      Log.info("Adding mode: %s", Messages.ModesPanel_ModeDefaultCustomName); //$NON-NLS-1$
+      addMode(Messages.ModesPanel_ModeDefaultCustomName);
       Prefs.getStore().setValue(Prefs.PREFS_VERSION, UCDInfo.getUCDVersion());
     }
   }
