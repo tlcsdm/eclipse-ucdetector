@@ -18,7 +18,7 @@
 		
 		<xsl:comment>
 To create custom reports change:
-ECLIPSE_HOME/dropins/com.tlcsdm.eclipse.ucdetector_*.jar/org/ucdetector/report/html.xslt
+ECLIPSE_HOME/dropins/com.tlcsdm.eclipse.ucdetector_*.jar/com/tlcsdm/eclipse/ucdetector/report/html.xslt
 		</xsl:comment>
 		
 		<html>

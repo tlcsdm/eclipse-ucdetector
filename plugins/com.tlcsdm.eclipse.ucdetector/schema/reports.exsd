@@ -83,7 +83,7 @@ the UCDetector report. This class must implement
          <attribute name="stylesheet" type="string">
             <annotation>
                <documentation>
-                  Name of a xslt resource used to create report. For example: org/ucdetector/report/html.xslt
+                   Name of a xslt resource used to create report. For example: com/tlcsdm/eclipse/ucdetector/report/html.xslt
                </documentation>
             </annotation>
          </attribute>
@@ -115,7 +115,7 @@ the UCDetector report. This class must implement
 &lt;p&gt;
 &lt;pre&gt;
     &lt;extension point=&quot;com.tlcsdm.eclipse.ucdetector.reports&quot;&gt;
-       &lt;report resultFile=&quot;${reportName}.html&quot; description=&quot;html&quot; id=&quot;html.id&quot; stylesheet=&quot;org/ucdetector/report/html.xslt&quot;&gt;&lt;/report&gt;
+       &lt;report resultFile=&quot;${reportName}.html&quot; description=&quot;html&quot; id=&quot;html.id&quot; stylesheet=&quot;com/tlcsdm/eclipse/ucdetector/report/html.xslt&quot;&gt;&lt;/report&gt;
        &lt;report resultFile=&quot;${reportName}.txt&quot;  description=&quot;text&quot; id=&quot;text.id&quot; class=&quot;com.tlcsdm.eclipse.ucdetector.report.TextReport&quot;    &gt;&lt;/report&gt;
     &lt;/extension&gt;
 &lt;/pre&gt;

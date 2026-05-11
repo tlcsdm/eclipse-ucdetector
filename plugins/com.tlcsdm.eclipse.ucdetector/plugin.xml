@@ -32,109 +32,119 @@
   </extension>
   
   <!-- =====================================================================
-       POP UP - JAVA ELEMENTS
+       COMMANDS - actions exposed via the modern commands/handlers/menus API
        ===================================================================== -->
-  <extension point="org.eclipse.ui.popupMenus">
-    <objectContribution
-        adaptable="true"
-        objectClass="org.eclipse.jdt.core.IJavaElement"
-        id="com.tlcsdm.eclipse.ucdetector.popupMenus.project">
-      <menu label="%popupMenus.root"
-          path="additions"
-          id="ucdetectorGroupTlcsdm">
+  <extension point="org.eclipse.ui.commands">
+    <category
+        id="com.tlcsdm.eclipse.ucdetector.commands.category"
+        name="%commands.category.name"
+        description="%commands.category.description"/>
+    <command
+        id="com.tlcsdm.eclipse.ucdetector.command.count"
+        name="%CountAction.label"
+        description="%CountAction.tooltip"
+        categoryId="com.tlcsdm.eclipse.ucdetector.commands.category"/>
+    <command
+        id="com.tlcsdm.eclipse.ucdetector.command.cleanMarkers"
+        name="%CleanMarkersAction.label"
+        description="%CleanMarkersAction.tooltip"
+        categoryId="com.tlcsdm.eclipse.ucdetector.commands.category"/>
+    <command
+        id="com.tlcsdm.eclipse.ucdetector.command.detect"
+        name="%DetectAction.label"
+        description="%DetectAction.tooltip"
+        categoryId="com.tlcsdm.eclipse.ucdetector.commands.category"/>
+    <command
+        id="com.tlcsdm.eclipse.ucdetector.command.cycle"
+        name="%CycleAction.label"
+        description="%CycleAction.tooltip"
+        categoryId="com.tlcsdm.eclipse.ucdetector.commands.category"/>
+  </extension>
+
+  <extension point="org.eclipse.ui.handlers">
+    <handler
+        commandId="com.tlcsdm.eclipse.ucdetector.command.count"
+        class="com.tlcsdm.eclipse.ucdetector.action.CountHandler">
+      <enabledWhen>
+        <reference definitionId="com.tlcsdm.eclipse.ucdetector.expressions.javaElementOrWorkingSetSelected"/>
+      </enabledWhen>
+    </handler>
+    <handler
+        commandId="com.tlcsdm.eclipse.ucdetector.command.cleanMarkers"
+        class="com.tlcsdm.eclipse.ucdetector.action.CleanMarkersHandler">
+      <enabledWhen>
+        <reference definitionId="com.tlcsdm.eclipse.ucdetector.expressions.javaElementOrWorkingSetSelected"/>
+      </enabledWhen>
+    </handler>
+    <handler
+        commandId="com.tlcsdm.eclipse.ucdetector.command.detect"
+        class="com.tlcsdm.eclipse.ucdetector.action.UCDetectorHandler">
+      <enabledWhen>
+        <reference definitionId="com.tlcsdm.eclipse.ucdetector.expressions.javaElementOrWorkingSetSelected"/>
+      </enabledWhen>
+    </handler>
+    <handler
+        commandId="com.tlcsdm.eclipse.ucdetector.command.cycle"
+        class="com.tlcsdm.eclipse.ucdetector.cycle.CycleHandler">
+      <enabledWhen>
+        <reference definitionId="com.tlcsdm.eclipse.ucdetector.expressions.javaElementOrWorkingSetSelected"/>
+      </enabledWhen>
+    </handler>
+  </extension>
+
+  <extension point="org.eclipse.core.expressions.definitions">
+    <definition id="com.tlcsdm.eclipse.ucdetector.expressions.javaElementOrWorkingSetSelected">
+      <with variable="selection">
+        <count value="+"/>
+        <iterate operator="and">
+          <adapt type="org.eclipse.core.runtime.IAdaptable">
+            <or>
+              <instanceof value="org.eclipse.jdt.core.IJavaElement"/>
+              <instanceof value="org.eclipse.ui.IWorkingSet"/>
+            </or>
+          </adapt>
+        </iterate>
+      </with>
+    </definition>
+  </extension>
+
+  <extension point="org.eclipse.ui.menus">
+    <menuContribution
+        locationURI="popup:org.eclipse.ui.popup.any?after=additions"
+        allPopups="true">
+      <menu
+          id="com.tlcsdm.eclipse.ucdetector.popupMenu"
+          label="%popupMenus.root">
+        <visibleWhen checkEnabled="false">
+          <reference definitionId="com.tlcsdm.eclipse.ucdetector.expressions.javaElementOrWorkingSetSelected"/>
+        </visibleWhen>
+        <command
+            commandId="com.tlcsdm.eclipse.ucdetector.command.detect"
+            icon="$nl$/icons/ucd.gif"
+            style="push"/>
+        <command
+            commandId="com.tlcsdm.eclipse.ucdetector.command.cleanMarkers"
+            icon="icons/delete_obj.gif"
+            style="push"/>
+        <command
+            commandId="com.tlcsdm.eclipse.ucdetector.command.count"
+            icon="icons/info_tsk.gif"
+            style="push"/>
+        <separator
+            name="additions"
+            visible="false"/>
+        <separator
+            name="cycleSeparator"
+            visible="true"/>
+        <command
+            commandId="com.tlcsdm.eclipse.ucdetector.command.cycle"
+            icon="icons/cycle.gif"
+            style="push"/>
       </menu>
-
-    <!-- COUNT ============================ -->
-    <action class="com.tlcsdm.eclipse.ucdetector.action.CountAction"
-        enablesFor="+"
-        id="com.tlcsdm.eclipse.ucdetector.CountAction"
-        label="%CountAction.label"
-        tooltip="%CountAction.tooltip"
-        icon="icons/info_tsk.gif"
-        menubarPath="ucdetectorGroupTlcsdm/ucdetector"/>
-    
-    <!-- CLEAN MARKERS ============================ -->
-    <action class="com.tlcsdm.eclipse.ucdetector.action.CleanMarkersAction"
-        enablesFor="+"
-        id="com.tlcsdm.eclipse.ucdetector.CleanMarkersAction"
-        label="%CleanMarkersAction.label"
-        tooltip="%CleanMarkersAction.tooltip"
-        icon="icons/delete_obj.gif"
-        menubarPath="ucdetectorGroupTlcsdm/ucdetector"/>
-
-    <!-- DETECT UC ============================ -->
-    <action class="com.tlcsdm.eclipse.ucdetector.action.UCDetectorAction"
-        enablesFor="+"
-        id="com.tlcsdm.eclipse.ucdetector.SearchAction"
-        label="%DetectAction.label"
-        tooltip="%DetectAction.tooltip"
-        icon="$nl$/icons/ucd.gif"
-        menubarPath="ucdetectorGroupTlcsdm/ucdetector"
-        definitionId="com.tlcsdm.eclipse.ucdetector.definitionId.ucd"/>
-
-    <!-- DETECT CYCLE ============================ -->
-    <action class="com.tlcsdm.eclipse.ucdetector.cycle.CycleAction"
-        enablesFor="+"
-        id="com.tlcsdm.eclipse.ucdetector.cycle.CycleAction"
-        label="%CycleAction.label"
-        tooltip="%CycleAction.tooltip"
-        icon="icons/cycle.gif"
-        menubarPath="ucdetectorGroupTlcsdm/cycle"/>
-    </objectContribution>
+    </menuContribution>
   </extension>
 
 
-  <!-- =====================================================================
-       POP UP - WORKING SETS
-       ===================================================================== -->
-  <extension point="org.eclipse.ui.popupMenus">
-    <objectContribution
-        adaptable="true"
-        objectClass="org.eclipse.ui.IWorkingSet"
-        id="com.tlcsdm.eclipse.ucdetector.popupMenus.projectWorkingSet">
-      <menu label="%popupMenus.root"
-          path="additions"
-          id="ucdetectorGroupTlcsdm">
-      </menu>
-
-    <!-- COUNT ============================ -->
-    <action class="com.tlcsdm.eclipse.ucdetector.action.CountAction"
-        enablesFor="+"
-        id="com.tlcsdm.eclipse.ucdetector.CountActionWorkingSet"
-        label="%CountAction.label"
-        tooltip="%CountAction.tooltip"
-        icon="icons/info_tsk.gif"
-        menubarPath="ucdetectorGroupTlcsdm/ucdetector"/>
-    
-    <!-- CLEAN MARKERS ============================ -->
-    <action class="com.tlcsdm.eclipse.ucdetector.action.CleanMarkersAction"
-        enablesFor="+"
-        id="com.tlcsdm.eclipse.ucdetector.CleanMarkersActionWorkingSet"
-        label="%CleanMarkersAction.label"
-        tooltip="%CleanMarkersAction.tooltip"
-        icon="icons/delete_obj.gif"
-        menubarPath="ucdetectorGroupTlcsdm/ucdetector"/>
-
-    <!-- DETECT UC ============================ -->
-    <action class="com.tlcsdm.eclipse.ucdetector.action.UCDetectorAction"
-        enablesFor="+"
-        id="com.tlcsdm.eclipse.ucdetector.SearchActionWorkingSet"
-        label="%DetectAction.label"
-        tooltip="%DetectAction.tooltip"
-        icon="$nl$/icons/ucd.gif"
-        menubarPath="ucdetectorGroupTlcsdm/ucdetector"/>
-
-    <!-- DETECT CYCLE ============================ -->
-    <action class="com.tlcsdm.eclipse.ucdetector.cycle.CycleAction"
-        enablesFor="+"
-        id="com.tlcsdm.eclipse.ucdetector.cycle.CycleActionWorkingSet"
-        label="%CycleAction.label"
-        tooltip="%CycleAction.tooltip"
-        icon="icons/cycle.gif"
-        menubarPath="ucdetectorGroupTlcsdm/cycle"/>
-    </objectContribution>
-  </extension>
-    
   <!-- =====================================================================
        COMMAND+BINDINGS to declare shortcut  Alt+Shift+U
        2017-03-31: Removed: Does not work. Needs commands instead of actions
@@ -459,8 +469,8 @@
        UCDETECTOR REPORTS
        ===================================================================== -->
     <extension point="com.tlcsdm.eclipse.ucdetector.reports">
-       <report resultFile="${reportName}_custom.txt" description="%report.custom.name" id="custom" stylesheet="org/ucdetector/report/custom.xslt"></report>
-       <report resultFile="${reportName}.html" description="%report.html.name" id="html" stylesheet="org/ucdetector/report/html.xslt"></report>
+       <report resultFile="${reportName}_custom.txt" description="%report.custom.name" id="custom" stylesheet="com/tlcsdm/eclipse/ucdetector/report/__custom.xslt"></report>
+       <report resultFile="${reportName}.html" description="%report.html.name" id="html" stylesheet="com/tlcsdm/eclipse/ucdetector/report/html.xslt"></report>
        <report resultFile="${reportName}.txt" description="%report.text.name" id="text" class="com.tlcsdm.eclipse.ucdetector.report.TextReport" ></report>
     </extension>
 </plugin>
