@@ -1,0 +1,174 @@
+<html>
+<head>
+  <title>Tlcsdm UCDetector Plug-in - Preferences</title>
+  <link rel="stylesheet" href="book.css" charset="ISO-8859-1" type="text/css"/>
+</head>
+<body>
+  <h1>Preferences</h1>
+  <p>
+    Open <em>Window &gt; Preferences &gt; Tlcsdm UCDetector</em>. The preference page is organized in
+    five tabs that mirror the original UCDetector preference page from
+    <a href="http://www.ucdetector.org">www.ucdetector.org</a>: <em>Ignore</em>, <em>Detect</em>,
+    <em>Keywords</em>, <em>Report</em> and <em>Other</em>. Every setting on the page is described
+    below.
+  </p>
+
+  <h2>Ignore tab</h2>
+  <p>
+    Filters used during analysis. Patterns are comma-separated and support the wildcards <code>*</code>
+    (any number of characters) and <code>?</code> (single character). When an element matches, it is
+    skipped during detection.
+  </p>
+
+  <h3>Resources</h3>
+  <dl>
+    <dt>Source folders</dt>
+    <dd>If a source folder matches one of these expressions, all of its contents are skipped.
+        Useful for excluding generated sources or test source folders.</dd>
+    <dt>Packages</dt>
+    <dd>If a package matches one of these expressions, all classes in that package are skipped.</dd>
+    <dt>Derived files</dt>
+    <dd>Skip every class whose underlying file is marked <em>derived</em> in the workspace.
+        Generated code is typically derived.</dd>
+  </dl>
+
+  <h3>Classes</h3>
+  <dl>
+    <dt>Matching name</dt>
+    <dd>If a class name matches one of these expressions, the class is skipped.</dd>
+    <dt>Implementing/extending</dt>
+    <dd>Skip classes or interfaces that implement or extend one of the listed types. Use this for
+        framework callbacks (e.g. servlets, listeners) that are referenced reflectively.</dd>
+    <dt>Containing string</dt>
+    <dd>Skip classes whose source contains one of the configured strings. Useful when a marker
+        comment in the file should disable detection.</dd>
+    <dt>Having a main method</dt>
+    <dd>Classes with a <code>public static void main(String[])</code> method will not produce
+        &quot;unused class&quot; markers, since they are usually launched externally.</dd>
+  </dl>
+
+  <h3>Methods / Fields</h3>
+  <dl>
+    <dt>Methods</dt>
+    <dd>If a method name matches one of these expressions, the method is skipped.</dd>
+    <dt>Fields</dt>
+    <dd>If a field name matches one of these expressions, the field is skipped.</dd>
+    <dt>Bean methods</dt>
+    <dd>Ignore Java bean accessor methods (<code>getX</code>, <code>setX</code>, <code>isX</code>).
+        These are typically called reflectively and would otherwise produce many false positives.</dd>
+  </dl>
+
+  <h3>Marked code</h3>
+  <dl>
+    <dt>Code with Annotations</dt>
+    <dd>Skip code marked with one of the listed annotation types (for example
+        <code>javax.annotation.PostConstruct</code>).</dd>
+    <dt>Deprecated code</dt>
+    <dd>Skip code marked with the <code>@deprecated</code> javadoc tag or the
+        <code>@Deprecated</code> annotation. Disable to also review deprecated code.</dd>
+    <dt>Code with <code>// NO_UCD</code></dt>
+    <dd>Skip code that has a <code>// NO_UCD</code> end-of-line comment. The comment is the
+        recommended way to opt out a single member from detection. Disable to review existing
+        opt-outs.</dd>
+  </dl>
+
+  <h2>Detect tab</h2>
+  <p>
+    Decides which checks run and the warning level for each marker.
+  </p>
+
+  <h3>What to detect</h3>
+  <dl>
+    <dt>Detect code with max number of references</dt>
+    <dd>Threshold of references below which a marker is created. <code>0</code> means dead code
+        only, <code>1</code> means &quot;at most one reference&quot;, and so on.</dd>
+    <dt>In classes / In methods / In fields</dt>
+    <dd>Per-element-type combo boxes (<em>Ignore</em>, <em>Warning</em>, <em>Error</em>) used as
+        the warning level for the &quot;few references&quot; markers.</dd>
+    <dt>Detect code only called by tests</dt>
+    <dd>Mark production code that is only referenced from test code (typically code in source
+        folders ending with <code>test</code>).</dd>
+  </dl>
+
+  <h3>Use final</h3>
+  <dl>
+    <dt>Possible use of <code>final</code> for methods</dt>
+    <dd>Detect methods that are never overridden and could be declared <code>final</code>.</dd>
+    <dt>Possible use of <code>final</code> for fields</dt>
+    <dd>Detect fields that are never reassigned and could be declared <code>final</code>.</dd>
+  </dl>
+
+  <h3>Reduce visibility</h3>
+  <p>
+    For each Java element type a combo box decides whether to suggest reducing its visibility to
+    <em>protected</em> or <em>private</em>. Applying these warnings on classes or methods can cause
+    compile errors, so review the suggestion before fixing it.
+  </p>
+  <dl>
+    <dt>Classes protected / Classes private</dt>
+    <dd>Visibility warnings for classes.</dd>
+    <dt>Methods protected / Methods private</dt>
+    <dd>Visibility warnings for methods.</dd>
+    <dt>Fields protected / Fields private</dt>
+    <dd>Visibility warnings for non-constant fields.</dd>
+    <dt>Constants protected / Constants private</dt>
+    <dd>Visibility warnings for <code>static final</code> fields.</dd>
+    <dt>Don't care about warning <em>Access to enclosing type</em></dt>
+    <dd>Suppress visibility suggestions that would trigger the JDT compiler warning
+        <em>Access to enclosing type</em> (synthetic accessor emulation).</dd>
+  </dl>
+
+  <h3>Cycles</h3>
+  <dl>
+    <dt>Max class cycle size</dt>
+    <dd>Maximum number of classes that may participate in a cycle reported by the
+        <em>Detect cycles</em> command. Larger cycles are dropped.</dd>
+  </dl>
+
+  <h2>Keywords tab</h2>
+  <p>
+    Configures whether class names are searched in non-Java files (text, XML, properties, ...). Use
+    this when types are referenced only by name (e.g. Spring XML configurations or reflection).
+  </p>
+  <dl>
+    <dt>Search class names in text files (slow)</dt>
+    <dd>Turns the file-based search on. Disabled by default because it slows down detection.</dd>
+    <dt>Use full qualified class name</dt>
+    <dd>Search for the fully qualified name (<code>com.example.Foo</code>). Reduces false matches.</dd>
+    <dt>Use simple class name</dt>
+    <dd>Search for the simple name (<code>Foo</code>). Fast but produces more false positives.</dd>
+    <dt>File name pattern to search</dt>
+    <dd>Comma-separated list of file name patterns, for example <code>*.xml,*.properties</code>.</dd>
+  </dl>
+
+  <h2>Report tab</h2>
+  <p>
+    Controls where reports are written and which formats are produced.
+  </p>
+  <dl>
+    <dt>Report directory</dt>
+    <dd>Directory in which UCDetector writes report files.</dd>
+    <dt>Report file name</dt>
+    <dd>Template for the report file name. The placeholders <code>${number}</code>,
+        <code>${project}</code>, <code>${date}</code> and <code>${time}</code> are replaced at
+        run-time.</dd>
+    <dt>Create xml report</dt>
+    <dd>Additionally write an XML report next to the textual report.</dd>
+    <dt>Browse reports directory</dt>
+    <dd>Open the configured report directory in an external file browser.</dd>
+  </dl>
+
+  <h2>Other tab</h2>
+  <p>
+    Logging and miscellaneous settings.
+  </p>
+  <dl>
+    <dt>Level</dt>
+    <dd>Log level for plug-in output (<em>DEBUG</em>, <em>INFO</em>, <em>WARN</em>, <em>ERROR</em>,
+        <em>OFF</em>).</dd>
+    <dt>Log to Eclipse Console View</dt>
+    <dd>Mirror the log output to a dedicated <em>UCDetector Console</em> in the Eclipse
+        <em>Console</em> view.</dd>
+  </dl>
+</body>
+</html>
