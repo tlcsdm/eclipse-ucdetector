@@ -173,6 +173,14 @@ public final class Messages extends NLS {
   public static String PreferencePage_ReportDirToolTip;
   public static String PreferencePage_ReportFile;
   public static String PreferencePage_ReportFileToolTip;
+  public static String PreferencePage_Title;
+  public static String PreferencePage_CreateReport;
+  public static String PreferencePage_FilesAndDirectories;
+  public static String PreferencePage_FilesReports;
+  public static String PreferencePage_FilesModes;
+  public static String PreferencePage_FilesEclipseHome;
+  public static String PreferencePage_FilesLogFile;
+  public static String PreferencePage_FilesWorkspace;
   // SearchManager -----------------------------------------------------------
   //  public static String JavaElementUtil_Class;
   //  public static String JavaElementUtil_Constructor;
@@ -205,6 +213,8 @@ public final class Messages extends NLS {
   public static String UseAnnotation_UCD_QuickFix_label;
   public static String VisibilityQuickFix_label;
   public static String TodoQuickFix_label;
+  public static String UCDetectorConsole_Name;
+  public static String UCDetectorConsole_Close;
 
   public static String OutOfMemoryError_Hint; // NO_UCD
 
@@ -242,10 +252,12 @@ public final class Messages extends NLS {
   public static String ModesPanel_ModeLabelToolTip;
   //
   public static String ModesPanel_ComboToolTipStart;
+  public static String ModesPanel_ModeBuiltInLabel;
   // == new ==
   public static String ModesPanel_ModeNew;
   public static String ModesPanel_ModeNewToolTip;
   public static String ModesPanel_ModeNewTitle;
+  public static String ModesPanel_ModeCopyOf;
   // == remove ==
   public static String ModesPanel_ModeRemove;
   public static String ModesPanel_ModeRemoveToolTip;
@@ -260,6 +272,7 @@ public final class Messages extends NLS {
   public static String ModesPanel_ModeAlreadyExists;
   //
   public static String ModesPanel_ModeName;
+  public static String ModesPanel_ModeDefaultCustomName;
   public static String ModesPanel_CantSetPreferences; // NO_UCD
   public static String ModesPanel_ModeFileCantSave;
   // MODE STRINGS --------------------------------------------------------------
