@@ -6,6 +6,12 @@
 <body>
   <h1>Usage</h1>
 
+  <p>
+    This page describes every menu entry and every view contributed by the plug-in and explains what
+    happens when you run them. For the per-setting reference of the preference page see
+    <a href="05_preferences.html">Preferences</a>.
+  </p>
+
   <h2>Install the plug-in</h2>
   <ol>
     <li>Open <em>Help &gt; Install New Software...</em> in Eclipse.</li>
@@ -19,38 +25,102 @@
     <li>Open the <em>Tlcsdm UCDetector</em> submenu.</li>
     <li>Choose one of the available actions described below.</li>
   </ol>
+  <p>
+    The submenu only appears when the current selection contains Java elements
+    (<code>org.eclipse.jdt.core.IJavaElement</code>) or an Eclipse <em>working set</em>. The selection
+    determines the analysis scope: a project analyzes everything in that project, a package limits
+    the analysis to its compilation units, and a single type limits it to that type.
+  </p>
 
-  <h2>Main UI components</h2>
+  <h2>Menu actions</h2>
+  <p>
+    The plug-in contributes a single top-level <em>Tlcsdm UCDetector</em> submenu to context menus on
+    Java elements. The submenu groups four actions.
+  </p>
+
+  <h3>Detect unnecessary code</h3>
+  <p>
+    Runs the main UCDetector analysis on the current selection. The detector iterates over every
+    Java element in scope and creates Eclipse problem markers for every finding it produces:
+  </p>
+  <ul>
+    <li><strong>References</strong> &ndash; the element has no references at all (dead code) or only a
+        few references (configurable on the <em>Detect</em> tab).</li>
+    <li><strong>Visibility</strong> &ndash; the element could be declared with a more restrictive
+        visibility, for example <code>public</code> &rarr; <code>protected</code> &rarr;
+        <code>default</code> &rarr; <code>private</code>.</li>
+    <li><strong>Final</strong> &ndash; a method is never overridden, or a field is never reassigned,
+        and could be declared <code>final</code>.</li>
+    <li><strong>Test only</strong> &ndash; production code that is only referenced from test code.</li>
+  </ul>
+  <p>
+    What happens after running it:
+  </p>
+  <ul>
+    <li>A background job named <em>Detect unnecessary code</em> runs and shows progress in the
+        Eclipse status bar.</li>
+    <li>Each finding becomes a marker in the <em>Problems</em> view; the warning level (<em>Ignore</em>,
+        <em>Warning</em>, <em>Error</em>) for every check is taken from the <em>Detect</em> tab of the
+        preference page.</li>
+    <li>A textual or HTML report is written when the corresponding option is enabled on the
+        <em>Report</em> tab of the preference page; the result message tells you how many markers were
+        created and where the report was written.</li>
+    <li>If <em>Log to Eclipse Console View</em> is enabled, log output appears in a dedicated
+        <em>UCDetector Console</em>.</li>
+  </ul>
+
+  <h3>Clean markers</h3>
+  <p>
+    Removes every UCDetector marker that exists below the current selection. Use this command before
+    re-running detection on a project, or when you want to clear stale markers without changing any
+    code. It does not modify source files.
+  </p>
+
+  <h3>Count elements</h3>
+  <p>
+    Counts the Java elements that would be considered by <em>Detect unnecessary code</em> for the
+    current selection. The result is printed to the Eclipse Error Log and the
+    <em>UCDetector Console</em> (when console logging is enabled). Use it to estimate how large the
+    next detection run will be without actually creating markers.
+  </p>
+
+  <h3>Detect cycles</h3>
+  <p>
+    Searches the selected scope for cyclic class dependencies. Each cycle is reported as a tree in
+    the <em>Cycle View</em> (see below). The <em>Max class cycle size</em> preference on the
+    <em>Detect</em> tab limits how big a cycle may grow before it is dropped.
+  </p>
+
+  <h2>Views and other UI components</h2>
   <dl>
     <dt>Package Explorer / Project Explorer</dt>
-    <dd>Select the Java project, source folder, package, type or working set that UCDetector should analyze.</dd>
+    <dd>Selects the Java project, source folder, package, type or working set that the plug-in
+        should analyze. The right-click <em>Tlcsdm UCDetector</em> submenu is the entry point for
+        every command.</dd>
 
-    <dt>Tlcsdm UCDetector submenu</dt>
-    <dd>The entry point for the plug-in's commands in the context menu.</dd>
-
-    <dt>Detect unnecessary code</dt>
-    <dd>Runs the main analysis and reports dead code, reducible visibility and members that can be declared <code>final</code>.</dd>
-
-    <dt>Clean markers</dt>
-    <dd>Removes UCDetector markers from the selected scope when you want to rerun the analysis from a clean state.</dd>
-
-    <dt>Count elements</dt>
-    <dd>Counts the Java elements that would be considered by UCDetector for the current selection.</dd>
-
-    <dt>Detect cycles</dt>
-    <dd>Searches for cyclic class dependencies and opens the <em>Cycle View</em> for inspection.</dd>
+    <dt>Cycle View (<em>Window &gt; Show View &gt; Tlcsdm UCDetector &gt; Cycle View</em>)</dt>
+    <dd>Displays the result of the <em>Detect cycles</em> command as a tree of cyclic class
+        dependencies. Selecting a node opens the corresponding type in the Java editor so you can
+        break the cycle.</dd>
 
     <dt>Problems view</dt>
-    <dd>Shows UCDetector markers. Double-click a marker to jump to the affected source location.</dd>
+    <dd>Shows every marker created by the detection. Double-click a marker to jump to the affected
+        source location. Markers can be filtered using the standard Eclipse filter dialog of the
+        <em>Problems</em> view.</dd>
 
     <dt>Quick Fix (<code>Ctrl+1</code>)</dt>
-    <dd>Available for many marker types so you can apply the suggested fix directly from the editor.</dd>
+    <dd>Available for many marker types. Applies the suggestion of the marker (delete a member,
+        change visibility, add <code>final</code>, add a <code>// NO_UCD</code> comment, etc.)
+        directly from the Java editor.</dd>
 
-    <dt>Preferences page</dt>
-    <dd><em>Window &gt; Preferences &gt; Tlcsdm UCDetector</em> configures filters, detection modes, markers and logging.</dd>
+    <dt>Preferences page (<em>Window &gt; Preferences &gt; Tlcsdm UCDetector</em>)</dt>
+    <dd>Configures filters, detection modes, markers, reports and logging. See the
+        <a href="05_preferences.html">Preferences</a> page for a per-setting reference.</dd>
 
-    <dt>Tlcsdm UCDetector Console</dt>
-    <dd>Displays plug-in log output when console logging is enabled in the preferences.</dd>
+    <dt>UCDetector Console</dt>
+    <dd>Displays plug-in log output when <em>Log to Eclipse Console View</em> is enabled on the
+        <em>Other</em> tab of the preference page. Open it from the <em>Console</em> view's
+        <em>Open Console</em> drop-down (<em>UCDetector Console</em>).</dd>
   </dl>
 
   <h2>Review results</h2>
@@ -58,10 +128,9 @@
     UCDetector creates markers in the Eclipse <em>Problems</em> view. Double-click a marker to jump
     to the relevant source. Many findings also provide a Quick Fix via <code>Ctrl+1</code>.
   </p>
-
-  <h2>Preferences</h2>
   <p>
-    Open <em>Window &gt; Preferences &gt; Tlcsdm UCDetector</em> to configure detection modes, filters and markers.
+    To reset the workspace state between runs, use <em>Tlcsdm UCDetector &gt; Clean markers</em> on
+    the projects you want to re-analyze.
   </p>
 
   <h2>Headless mode</h2>
