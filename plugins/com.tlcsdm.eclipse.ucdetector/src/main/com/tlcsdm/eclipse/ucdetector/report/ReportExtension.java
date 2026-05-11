@@ -95,7 +95,7 @@ public final class ReportExtension {
             xsltExtensions.add(new ReportExtension(resultFile, name, xslt, null, id));
           }
           else if (xslt.endsWith("custom.xslt")) { //$NON-NLS-1$
-            Log.info("Tip: To create custom reports rename file to custom.xslt: com.tlcsdm.eclipse.ucdetector_x.y.z.jar/org/ucdetector/report/__custom.xslt"); //$NON-NLS-1$
+            Log.info("Tip: To create custom reports rename file to custom.xslt: com.tlcsdm.eclipse.ucdetector_x.y.z.jar/com/tlcsdm/eclipse/ucdetector/report/__custom.xslt"); //$NON-NLS-1$
           }
         }
         else if (xslt == null && clazz != null) {

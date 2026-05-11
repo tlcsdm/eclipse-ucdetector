@@ -119,17 +119,23 @@
           <reference definitionId="com.tlcsdm.eclipse.ucdetector.expressions.javaElementOrWorkingSetSelected"/>
         </visibleWhen>
         <command
-            commandId="com.tlcsdm.eclipse.ucdetector.command.count"
-            icon="icons/info_tsk.gif"
+            commandId="com.tlcsdm.eclipse.ucdetector.command.detect"
+            icon="$nl$/icons/ucd.gif"
             style="push"/>
         <command
             commandId="com.tlcsdm.eclipse.ucdetector.command.cleanMarkers"
             icon="icons/delete_obj.gif"
             style="push"/>
         <command
-            commandId="com.tlcsdm.eclipse.ucdetector.command.detect"
-            icon="$nl$/icons/ucd.gif"
+            commandId="com.tlcsdm.eclipse.ucdetector.command.count"
+            icon="icons/info_tsk.gif"
             style="push"/>
+        <separator
+            name="additions"
+            visible="false"/>
+        <separator
+            name="cycleSeparator"
+            visible="true"/>
         <command
             commandId="com.tlcsdm.eclipse.ucdetector.command.cycle"
             icon="icons/cycle.gif"
@@ -463,8 +469,8 @@
        UCDETECTOR REPORTS
        ===================================================================== -->
     <extension point="com.tlcsdm.eclipse.ucdetector.reports">
-       <report resultFile="${reportName}_custom.txt" description="%report.custom.name" id="custom" stylesheet="org/ucdetector/report/custom.xslt"></report>
-       <report resultFile="${reportName}.html" description="%report.html.name" id="html" stylesheet="org/ucdetector/report/html.xslt"></report>
+       <report resultFile="${reportName}_custom.txt" description="%report.custom.name" id="custom" stylesheet="com/tlcsdm/eclipse/ucdetector/report/__custom.xslt"></report>
+       <report resultFile="${reportName}.html" description="%report.html.name" id="html" stylesheet="com/tlcsdm/eclipse/ucdetector/report/html.xslt"></report>
        <report resultFile="${reportName}.txt" description="%report.text.name" id="text" class="com.tlcsdm.eclipse.ucdetector.report.TextReport" ></report>
     </extension>
 </plugin>
