@@ -18,6 +18,7 @@ import java.util.Stack;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.osgi.util.NLS;
+
 import com.tlcsdm.eclipse.ucdetector.Log;
 import com.tlcsdm.eclipse.ucdetector.Messages;
 import com.tlcsdm.eclipse.ucdetector.cycle.model.Cycle;
@@ -52,18 +53,16 @@ class CycleCalculator {
    * get all cycles, including double cycles
    */
   private List<Cycle> getAllCycles() {
-    List<Cycle> allCycles = new ArrayList<Cycle>();
+    List<Cycle> allCycles = new ArrayList<>();
     int count = 0;
     int prevSize = 0;
     for (TypeAndMatches typeAndMatches : typeAndMatchesList) {
-      Object[] bindings = new Object[] {//
-      Integer.valueOf(count++), //
-          Integer.valueOf(typeAndMatchesList.size()), //
+      Object[] bindings = new Object[] { Integer.valueOf(count++), Integer.valueOf(typeAndMatchesList.size()),
           typeAndMatches.getRoot().getElementName() };
       String mes = NLS.bind(Messages.CycleCalculator_Monitor, bindings);
       monitor.subTask(mes);
       monitor.worked(1);
-      Stack<TypeAndMatches> path = new Stack<TypeAndMatches>();
+      Stack<TypeAndMatches> path = new Stack<>();
       IType startType = typeAndMatches.getRoot();
       searchCycles(startType, path, allCycles);
       if (Log.isDebug()) {
@@ -95,7 +94,7 @@ class CycleCalculator {
   private List<Cycle> removeDoubleCycles(List<Cycle> cyclesFound) {
     monitor.subTask(Messages.CycleCalculator_removeDoubleCycles);
     monitor.worked(1);
-    List<Cycle> result = new ArrayList<Cycle>();
+    List<Cycle> result = new ArrayList<>();
     if (cyclesFound.isEmpty()) {
       return result;
     }
@@ -163,7 +162,7 @@ class CycleCalculator {
   }
 
   private static LinkedList<CycleType> createCycleList(List<TypeAndMatches> matches) {
-    LinkedList<CycleType> result = new LinkedList<CycleType>();
+    LinkedList<CycleType> result = new LinkedList<>();
     for (int i = 0; i < matches.size(); i++) {
       int next = (i + 1) % matches.size();
       IType matchTarget = matches.get(next).getRoot();

@@ -12,13 +12,14 @@ import java.util.List;
 
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.ISharedImages;
+
 import com.tlcsdm.eclipse.ucdetector.Messages;
 
 /**
  * Contains all search results
- * 
+ *
  * <pre>
- * <font color="red">SearchResultRoot</font> 
+ * <font color="red">SearchResultRoot</font>
  *   |- SearchResult
  *     |- Cycle
  *       |- CycleType
@@ -29,7 +30,7 @@ import com.tlcsdm.eclipse.ucdetector.Messages;
 public class SearchResultRoot extends CycleBaseElement {
   private static final SearchResultRoot INSTANCE = new SearchResultRoot();
 
-  private static final List<SearchResult> searchResults = new ArrayList<SearchResult>();
+  private static final List<SearchResult> searchResults = new ArrayList<>();
 
   public static final SearchResultRoot getInstance() {
     return INSTANCE;

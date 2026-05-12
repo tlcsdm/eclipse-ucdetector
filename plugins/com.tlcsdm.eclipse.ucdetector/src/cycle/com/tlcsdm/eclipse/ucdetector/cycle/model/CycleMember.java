@@ -13,12 +13,13 @@ import java.util.List;
 import org.eclipse.jdt.core.IImportDeclaration;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IType;
+
 import com.tlcsdm.eclipse.ucdetector.util.JavaElementUtil;
 
 /**
  * Container for a javaElement (for example a method, field, import declaration)
  * and the regions, where a reference is found
- * 
+ *
  * <pre>
  * SearchResultRoot
  *   |- SearchResult
@@ -29,7 +30,7 @@ import com.tlcsdm.eclipse.ucdetector.util.JavaElementUtil;
  */
 public class CycleMember extends CycleJavaElement {
   private final IJavaElement match;
-  private final List<CycleRegion> cycleRegions = new ArrayList<CycleRegion>();
+  private final List<CycleRegion> cycleRegions = new ArrayList<>();
   private CycleType parent;
 
   public CycleMember(IJavaElement match) {

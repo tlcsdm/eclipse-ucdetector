@@ -17,6 +17,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IMember;
+
 import com.tlcsdm.eclipse.ucdetector.Log;
 import com.tlcsdm.eclipse.ucdetector.UCDInfo;
 import com.tlcsdm.eclipse.ucdetector.UCDetectorPlugin;
@@ -38,7 +39,7 @@ public class TextReport implements IUCDetectorReport {
   private ReportExtension extension;
   private IJavaElement[] objectsToIterate;
   private int markerCount = 0;
-  private final List<IStatus> detectionProblems = new ArrayList<IStatus>();
+  private final List<IStatus> detectionProblems = new ArrayList<>();
 
   @Override
   public void startReport(IJavaElement[] objectsToIterateIn, long startTime) throws CoreException {

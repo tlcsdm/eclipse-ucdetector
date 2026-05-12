@@ -35,6 +35,7 @@ import org.eclipse.search.core.text.TextSearchEngine;
 import org.eclipse.search.core.text.TextSearchMatchAccess;
 import org.eclipse.search.core.text.TextSearchRequestor;
 import org.eclipse.search.ui.text.FileTextSearchScope;
+
 import com.tlcsdm.eclipse.ucdetector.Log;
 import com.tlcsdm.eclipse.ucdetector.Messages;
 import com.tlcsdm.eclipse.ucdetector.UCDInfo;
@@ -67,11 +68,11 @@ public class SearchManager {
   /** Number of classes, methods, fields already searched */
   private int search = 0;
   /** shortcut to skip methods and fields of classes which have no references */
-  private final List<IType> noRefTypes = new ArrayList<IType>();
+  private final List<IType> noRefTypes = new ArrayList<>();
   /** Skip search for enum constants, because they are used by value() or valueOf() */
   private final UsedByValueEnumsCache usedByValueEnumsCache = new UsedByValueEnumsCache();
   /** contains all exceptions happened during search */
-  private final List<IStatus> searchProblems = new ArrayList<IStatus>();
+  private final List<IStatus> searchProblems = new ArrayList<>();
   /** Factory to create markers */
   private final MarkerFactory markerFactory;
   /** handle final stuff   */
@@ -113,8 +114,8 @@ public class SearchManager {
     Log.info("Search end: " + UCDInfo.getNow(true)); //$NON-NLS-1$
     if (searchProblems.size() > 0) {
       IStatus[] stati = searchProblems.toArray(new IStatus[searchProblems.size()]);
-      MultiStatus status = new MultiStatus(UCDetectorPlugin.ID, IStatus.ERROR, stati, stati.length
-          + " errors happened during UCDetection", null); //$NON-NLS-1$
+      MultiStatus status = new MultiStatus(UCDetectorPlugin.ID, IStatus.ERROR, stati,
+          stati.length + " errors happened during UCDetection", null); //$NON-NLS-1$
       UCDetectorPlugin.logToEclipseLog(status);
     }
   }
@@ -186,7 +187,7 @@ public class SearchManager {
   @SuppressWarnings("boxing")
   private String getProgress(Set<TypeContainer> typeContainers, int pos, TypeContainer container) {
     return String.format("Search %4s of %4s types. Markers %4s. Exceptions %2s. Class %s - %s", //$NON-NLS-1$
-        pos, typeContainers.size(), markerCreated, searchProblems.size(),//
+        pos, typeContainers.size(), markerCreated, searchProblems.size(), //
         JavaElementUtil.getTypeName(container.getType()), UCDInfo.getNow(true));
   }
 
@@ -316,8 +317,8 @@ public class SearchManager {
 
   /** Search lazy to avoid time consuming: JavaElementUtil.isUsedBySpecialEnumMethods() */
   private static final class UsedByValueEnumsCache {
-    private final List<IType> alreadySearched = new ArrayList<IType>();
-    private final List<IType> usedByValueEnums = new ArrayList<IType>();
+    private final List<IType> alreadySearched = new ArrayList<>();
+    private final List<IType> usedByValueEnums = new ArrayList<>();
 
     boolean contains(IType enumType) throws CoreException {
       if (enumType.isEnum() && !alreadySearched.contains(enumType)) {
@@ -458,9 +459,10 @@ public class SearchManager {
     String searchInfo = JavaElementUtil.getMemberTypeString(member);
 
     updateMonitorMessage(type, Messages.SearchManager_SearchClassNameAsLiteral, searchInfo);
-    FileTextSearchScope scope = FileTextSearchScope.newWorkspaceScope(Prefs.getFilePatternLiteralSearch(), /*exclude bin dir */
+    FileTextSearchScope scope = FileTextSearchScope.newWorkspaceScope(
+        Prefs.getFilePatternLiteralSearch(), /*exclude bin dir */
         false);
-    List<String> searchStrings = new ArrayList<String>();
+    List<String> searchStrings = new ArrayList<>();
     if (Prefs.isUCDetectionInLiteralsFullClassName()) {
       String fullClassName = type.getFullyQualifiedName();
       searchStrings.add(fullClassName);
@@ -507,7 +509,7 @@ public class SearchManager {
    * text search in files
    */
   private static final class UCDFileSearchRequestor extends TextSearchRequestor {
-    final List<String> matchedFiles = new ArrayList<String>();
+    final List<String> matchedFiles = new ArrayList<>();
     final VisibilityHandler visibilityHandler;
     final String searchString;
     private final IType startType;

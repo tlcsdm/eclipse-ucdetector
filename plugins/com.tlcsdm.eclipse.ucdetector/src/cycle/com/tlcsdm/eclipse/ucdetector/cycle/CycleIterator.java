@@ -14,6 +14,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IType;
+
 import com.tlcsdm.eclipse.ucdetector.Messages;
 import com.tlcsdm.eclipse.ucdetector.iterator.AbstractUCDetectorIterator;
 import com.tlcsdm.eclipse.ucdetector.preferences.Prefs;
@@ -22,24 +23,24 @@ import com.tlcsdm.eclipse.ucdetector.preferences.Prefs;
  * search for class cycles
  */
 class CycleIterator extends AbstractUCDetectorIterator {
-  private final List<IType> types = new ArrayList<IType>();
+  private final List<IType> types = new ArrayList<>();
 
   @Override
   protected boolean handleType(IType type) throws CoreException {
     // Fix [ 2103655 ] Detect cycles does not show anything
     // Don't use "isUCDetectionInClasses()" here!
     if (isPrivate(type) || type.isLocal() || type.isAnonymous()) {
-      debugNotHandle(type, "isPrivate or isLocal or isAnonymous"); //$NON-NLS-1$ 
+      debugNotHandle(type, "isPrivate or isLocal or isAnonymous"); //$NON-NLS-1$
       return false;
     }
     if (Prefs.isFilterType(type)) {
-      debugNotHandle(type, "isFilterType"); //$NON-NLS-1$ 
+      debugNotHandle(type, "isFilterType"); //$NON-NLS-1$
       return false;
     }
     ICompilationUnit compilationUnit = type.getCompilationUnit();
     IType primaryType = compilationUnit.findPrimaryType();
     if (!primaryType.equals(type)) {
-      debugNotHandle(type, "not is primary type"); //$NON-NLS-1$ 
+      debugNotHandle(type, "not is primary type"); //$NON-NLS-1$
       return false;
     }
     debugHandle(type);

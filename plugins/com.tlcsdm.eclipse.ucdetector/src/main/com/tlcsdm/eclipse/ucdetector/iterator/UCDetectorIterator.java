@@ -15,6 +15,7 @@ import org.eclipse.jdt.core.IField;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
+
 import com.tlcsdm.eclipse.ucdetector.Messages;
 import com.tlcsdm.eclipse.ucdetector.UCDInfo;
 import com.tlcsdm.eclipse.ucdetector.preferences.Prefs;
@@ -31,7 +32,7 @@ import com.tlcsdm.eclipse.ucdetector.util.StopWatch;
  * @since 2008-02-29
  * */
 public class UCDetectorIterator extends AbstractUCDetectorIterator {
-  private final Set<TypeContainer> typeContainers = new LinkedHashSet<TypeContainer>();
+  private final Set<TypeContainer> typeContainers = new LinkedHashSet<>();
   private TypeContainer iteratedTypeContainer = null;
 
   /**

@@ -12,11 +12,12 @@ import java.util.List;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
+
 import com.tlcsdm.eclipse.ucdetector.Log;
 import com.tlcsdm.eclipse.ucdetector.UCDetectorPlugin;
 
 /**
- * Provid access to the com.tlcsdm.eclipse.ucdetector.reports extension point
+ * Provide access to the com.tlcsdm.eclipse.ucdetector.reports extension point.
  * <p>
  * @author Joerg Spieler
  * @since 2011-04.01
@@ -78,9 +79,9 @@ public final class ReportExtension {
   private static void loadExtensions() {
     if (!isInitialized) {
       isInitialized = true;
-      xsltExtensions = new ArrayList<ReportExtension>();
-      classExtensions = new ArrayList<ReportExtension>();
-      allExtensions = new ArrayList<ReportExtension>();
+      xsltExtensions = new ArrayList<>();
+      classExtensions = new ArrayList<>();
+      allExtensions = new ArrayList<>();
       IExtensionRegistry reg = Platform.getExtensionRegistry();
       IConfigurationElement[] reports = reg.getConfigurationElementsFor(EXTENSION_POINT_ID);
       for (IConfigurationElement report : reports) {
@@ -95,7 +96,8 @@ public final class ReportExtension {
             xsltExtensions.add(new ReportExtension(resultFile, name, xslt, null, id));
           }
           else if (xslt.endsWith("custom.xslt")) { //$NON-NLS-1$
-            Log.info("Tip: To create custom reports rename file to custom.xslt: com.tlcsdm.eclipse.ucdetector_x.y.z.jar/com/tlcsdm/eclipse/ucdetector/report/__custom.xslt"); //$NON-NLS-1$
+            Log.info(
+                "Tip: To create custom reports rename file to custom.xslt: com.tlcsdm.eclipse.ucdetector_x.y.z.jar/com/tlcsdm/eclipse/ucdetector/report/__custom.xslt"); //$NON-NLS-1$
           }
         }
         else if (xslt == null && clazz != null) {
