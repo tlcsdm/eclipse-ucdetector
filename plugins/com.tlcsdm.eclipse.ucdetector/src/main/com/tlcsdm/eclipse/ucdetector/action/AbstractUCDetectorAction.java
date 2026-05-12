@@ -41,10 +41,12 @@ import com.tlcsdm.eclipse.ucdetector.search.UCDProgressMonitor;
 /**
  * Base class for actions in this plugin
  * <p>
+ * Must remain public for the Eclipse action registration.
+ * </p>
  * @author Joerg Spieler
  * @since 2008-02-29
  */
-public abstract class AbstractUCDetectorAction extends ActionDelegate {
+public abstract class AbstractUCDetectorAction extends ActionDelegate { // NO_UCD
   private final List<Object> selections = new ArrayList<>();
 
   @Override

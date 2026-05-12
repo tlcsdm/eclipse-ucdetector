@@ -6,8 +6,6 @@
  */
 package com.tlcsdm.eclipse.ucdetector.report;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +17,7 @@ import com.tlcsdm.eclipse.ucdetector.Log;
 import com.tlcsdm.eclipse.ucdetector.UCDetectorPlugin;
 
 /**
- * Provid access to the com.tlcsdm.eclipse.ucdetector.reports extension point
+ * Provide access to the com.tlcsdm.eclipse.ucdetector.reports extension point.
  * <p>
  * @author Joerg Spieler
  * @since 2011-04.01
@@ -92,14 +90,8 @@ public final class ReportExtension {
         String xslt = report.getAttribute(ATTRIBUTE_STYLESHEET);
         String clazz = report.getAttribute(ATTRIBUTE_CLASS);
         String id = report.getAttribute(ATTRIBUTE_REPORT_ID);
-        boolean xsltFound = false;
         if (xslt != null && clazz == null) {
-          try (InputStream is = ReportExtension.class.getClassLoader().getResourceAsStream(xslt)) {
-            xsltFound = is != null;
-          }
-          catch (IOException e) {
-            Log.error("Can't load XSLT: " + xslt, e); //$NON-NLS-1$
-          }
+          boolean xsltFound = ReportExtension.class.getClassLoader().getResourceAsStream(xslt) != null;
           if (xsltFound) {
             xsltExtensions.add(new ReportExtension(resultFile, name, xslt, null, id));
           }
