@@ -6,6 +6,8 @@
  */
 package com.tlcsdm.eclipse.ucdetector.report;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,8 +92,14 @@ public final class ReportExtension {
         String xslt = report.getAttribute(ATTRIBUTE_STYLESHEET);
         String clazz = report.getAttribute(ATTRIBUTE_CLASS);
         String id = report.getAttribute(ATTRIBUTE_REPORT_ID);
+        boolean xsltFound = false;
         if (xslt != null && clazz == null) {
-          boolean xsltFound = ReportExtension.class.getClassLoader().getResourceAsStream(xslt) != null;
+          try (InputStream is = ReportExtension.class.getClassLoader().getResourceAsStream(xslt)) {
+            xsltFound = is != null;
+          }
+          catch (IOException e) {
+            Log.error("Can't load XSLT: " + xslt, e); //$NON-NLS-1$
+          }
           if (xsltFound) {
             xsltExtensions.add(new ReportExtension(resultFile, name, xslt, null, id));
           }
