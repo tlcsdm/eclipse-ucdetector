@@ -7,6 +7,8 @@
  */
 package com.tlcsdm.eclipse.ucdetector.action;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -54,12 +56,9 @@ public class ExampleAction extends AbstractUCDetectorAction {// NO_UCD
     }
     iterator = ITERATORS[open];
     try {
-      iterator = iterator.getClass().newInstance();
+      iterator = iterator.getClass().getConstructor().newInstance();
     }
-    catch (InstantiationException e) {
-      e.printStackTrace();
-    }
-    catch (IllegalAccessException e) {
+    catch (IllegalAccessException | InstantiationException | InvocationTargetException | NoSuchMethodException e) {
       e.printStackTrace();
     }
     Log.info("Selected iterator: " + iterator);
