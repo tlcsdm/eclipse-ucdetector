@@ -59,7 +59,7 @@ public class ExampleAction extends AbstractUCDetectorAction {// NO_UCD
       iterator = iterator.getClass().getConstructor().newInstance();
     }
     catch (IllegalAccessException | InstantiationException | InvocationTargetException | NoSuchMethodException e) {
-      e.printStackTrace();
+      Log.error("Can't instantiate iterator: " + iterator.getClass().getName(), e); //$NON-NLS-1$
     }
     Log.info("Selected iterator: " + iterator);
     return iterator;
