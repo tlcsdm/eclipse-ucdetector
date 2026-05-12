@@ -31,7 +31,6 @@ import org.eclipse.ui.IWorkingSet;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionDelegate;
 import org.eclipse.ui.progress.IProgressConstants;
-
 import com.tlcsdm.eclipse.ucdetector.Log;
 import com.tlcsdm.eclipse.ucdetector.Messages;
 import com.tlcsdm.eclipse.ucdetector.UCDetectorPlugin;
@@ -44,8 +43,9 @@ import com.tlcsdm.eclipse.ucdetector.search.UCDProgressMonitor;
  * @author Joerg Spieler
  * @since 2008-02-29
  */
-public abstract class AbstractUCDetectorAction extends ActionDelegate {
-  private final List<Object> selections = new ArrayList<>();
+// Don't change visibility to default!
+public abstract class AbstractUCDetectorAction extends ActionDelegate { // NO_UCD
+  private final List<Object> selections = new ArrayList<Object>();
 
   @Override
   public void runWithEvent(IAction action, Event event) {
@@ -115,6 +115,7 @@ public abstract class AbstractUCDetectorAction extends ActionDelegate {
   /** Disable / enable action */
   @Override
   public void selectionChanged(IAction action, ISelection selection) {
+    // System.out.println("action=" + action.getText());
     if (action != null) {
       getSelectedJavaElements(selection);
       PlatformUI.getWorkbench().getHelpSystem().setHelp(action, UCDetectorPlugin.HELP_ID);
@@ -144,14 +145,14 @@ public abstract class AbstractUCDetectorAction extends ActionDelegate {
   }
 
   /** Enable/disable action. Default Behavior: enabled for all java elements   */
-  protected void handleJavaElementSelections(IAction action) {//
-    action.setEnabled(true);
+  protected void handleJavaElementSelections(IAction action) {// 
+    action.setEnabled(true/*allAccessible()*/);
   }
 
   /** @return never <code>null</code> */
   // Create javaProject lazy, because selectionChanged() is called frequently
   protected IJavaElement[] getSelections() {
-    List<IJavaElement> result = new ArrayList<>();
+    List<IJavaElement> result = new ArrayList<IJavaElement>();
     for (Object selection : selections) {
       if (selection instanceof IJavaElement) {
         result.add((IJavaElement) selection);
@@ -167,3 +168,32 @@ public abstract class AbstractUCDetectorAction extends ActionDelegate {
     return result.toArray(new IJavaElement[result.size()]);
   }
 }
+//  /**
+//   * @return <code>true</code> when all javaElements are accessible.
+//   *         Accessibility is necessary to create markers.
+//   */
+//  private final boolean allAccessible() { // 
+//    for (IJavaElement javaElement : selections) {
+//      try {
+//        if (!javaElement.exists()) {
+//          return true;
+//        }
+//        if (javaElement instanceof IMember) {
+//          return !((IMember) javaElement).isBinary();
+//        }
+//        if (javaElement instanceof IPackageFragmentRoot) {
+//          IPackageFragmentRoot pfr = (IPackageFragmentRoot) javaElement;
+//          return pfr.getKind() != IPackageFragmentRoot.K_BINARY;
+//        }
+//        IResource resource = javaElement.getCorrespondingResource();
+//        if (resource == null || !resource.isAccessible()) {
+//          return false;
+//        }
+//      }
+//      catch (JavaModelException e) {
+//        Log.error("Can't get allAccessible for javaElement: " + javaElement, e); //$NON-NLS-1$
+//        return false;
+//      }
+//    }
+//    return true;
+//  }

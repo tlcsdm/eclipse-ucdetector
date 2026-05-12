@@ -50,11 +50,6 @@ import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.osgi.util.NLS;
 import org.osgi.framework.Bundle;
-import org.w3c.dom.DOMImplementation;
-import org.w3c.dom.Document;
-import org.w3c.dom.DocumentType;
-import org.w3c.dom.Element;
-
 import com.tlcsdm.eclipse.ucdetector.Log;
 import com.tlcsdm.eclipse.ucdetector.Messages;
 import com.tlcsdm.eclipse.ucdetector.UCDInfo;
@@ -64,6 +59,10 @@ import com.tlcsdm.eclipse.ucdetector.util.JavaElementUtil;
 import com.tlcsdm.eclipse.ucdetector.util.JavaElementUtil.MemberInfo;
 import com.tlcsdm.eclipse.ucdetector.util.MarkerFactory;
 import com.tlcsdm.eclipse.ucdetector.util.StopWatch;
+import org.w3c.dom.DOMImplementation;
+import org.w3c.dom.Document;
+import org.w3c.dom.DocumentType;
+import org.w3c.dom.Element;
 
 /**
  * Creates text report files like:
@@ -103,7 +102,7 @@ public class XmlReport implements IUCDetectorReport {
   private int detectionProblemCount;
   private Throwable initXMLException;
 
-  private final Map<String, Element> aboutNodes = new HashMap<>();
+  private final Map<String, Element> aboutNodes = new HashMap<String, Element>();
   private boolean endReportCalled;
 
   private IJavaElement[] objectsToIterate;

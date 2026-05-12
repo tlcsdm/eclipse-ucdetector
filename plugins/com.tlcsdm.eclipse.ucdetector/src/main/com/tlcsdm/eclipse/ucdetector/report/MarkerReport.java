@@ -22,7 +22,6 @@ import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.ISourceRange;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
-
 import com.tlcsdm.eclipse.ucdetector.Log;
 import com.tlcsdm.eclipse.ucdetector.preferences.WarnLevel;
 import com.tlcsdm.eclipse.ucdetector.util.JavaElementUtil;
@@ -37,7 +36,7 @@ import com.tlcsdm.eclipse.ucdetector.util.MarkerFactory;
 public class MarkerReport implements IUCDetectorReport {
   /** Don't create each marker. Do a batch creation instead */
   private static final int MARKERS_FLASH_LIMIT = 10;
-  private final List<ReportParam> markersToFlash = new ArrayList<>();
+  private final List<ReportParam> markersToFlash = new ArrayList<ReportParam>();
   private int totalMarkerCount = 0;
 
   @SuppressWarnings("boxing")
@@ -51,7 +50,7 @@ public class MarkerReport implements IUCDetectorReport {
     ISourceRange range = javaElement.getNameRange();
     IMarker marker = javaElement.getResource().createMarker(reportParam.getMarkerType());
     // Increase speed, use map:
-    Map<String, Object> attributes = new HashMap<>();
+    Map<String, Object> attributes = new HashMap<String, Object>();
     attributes.put(IMarker.SEVERITY, severity);
     attributes.put(IMarker.MESSAGE, reportParam.getMessage());
     attributes.put(IMarker.PRIORITY, IMarker.PRIORITY_HIGH);
@@ -165,7 +164,7 @@ public class MarkerReport implements IUCDetectorReport {
 
   @Override
   public void reportDetectionProblem(IStatus status) {
-    //
+    // 
   }
 
   @Override

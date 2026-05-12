@@ -51,7 +51,6 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.prefs.BackingStoreException;
-
 import com.tlcsdm.eclipse.ucdetector.Log.LogLevel;
 import com.tlcsdm.eclipse.ucdetector.preferences.Prefs;
 
@@ -163,7 +162,7 @@ public class UCDetectorPlugin extends AbstractUIPlugin {
     //IEclipsePreferences node = new InstanceScope().getNode(ID);
     IEclipsePreferences node = InstanceScope.INSTANCE.getNode(ID);
     Map<String, String> allDeltas = getPreferencesImpl(node);
-    Set<String> keySetClone = new HashSet<>(allDeltas.keySet());
+    Set<String> keySetClone = new HashSet<String>(allDeltas.keySet());
     for (String key : keySetClone) {
       if (key.startsWith(Prefs.INTERNAL)) {
         allDeltas.remove(key);
@@ -180,7 +179,7 @@ public class UCDetectorPlugin extends AbstractUIPlugin {
   }
 
   private static Map<String, String> getPreferencesImpl(IEclipsePreferences ePrefs) {
-    Map<String, String> result = new LinkedHashMap<>();
+    Map<String, String> result = new LinkedHashMap<String, String>();
     try {
       String[] propertyNames = ePrefs.keys();
       Arrays.sort(propertyNames);
@@ -268,7 +267,7 @@ public class UCDetectorPlugin extends AbstractUIPlugin {
   }
 
   public static IWorkbenchWindow getActiveWorkbenchWindow() {
-    return PlatformUI.getWorkbench().getWorkbenchWindows()[0];
+    return getDefault().getWorkbench().getWorkbenchWindows()[0];
   }
 
   public static Shell getShell() {
@@ -356,7 +355,7 @@ public class UCDetectorPlugin extends AbstractUIPlugin {
   /** Try newest Parser first. */
   private static final int[] AST_PARSER_LEVELS = { //
       8, // AST.JLS8
-      AST.getJLSLatest(), // AST.JLS4, fixes: #70 Error in numeric literal with underscores:  http://sourceforge.net/p/ucdetector/bugs/70/
+      AST.JLS4, // AST.JLS4, fixes: #70 Error in numeric literal with underscores:  http://sourceforge.net/p/ucdetector/bugs/70/
       //AST.JLS3, //
   };
 

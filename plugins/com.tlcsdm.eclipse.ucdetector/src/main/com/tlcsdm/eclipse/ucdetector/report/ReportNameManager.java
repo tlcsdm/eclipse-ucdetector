@@ -16,7 +16,6 @@ import java.util.Set;
 
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jdt.core.IJavaElement;
-
 import com.tlcsdm.eclipse.ucdetector.Log;
 import com.tlcsdm.eclipse.ucdetector.UCDetectorPlugin;
 import com.tlcsdm.eclipse.ucdetector.preferences.Prefs;
@@ -107,7 +106,7 @@ public class ReportNameManager {
   }
 
   private static String getProjectName(IJavaElement[] objectsToIterate) {
-    Set<String> projects = new HashSet<>();
+    Set<String> projects = new HashSet<String>();
     for (IJavaElement element : objectsToIterate) {
       if (element.getJavaProject() != null) {
         projects.add(element.getJavaProject().getElementName());

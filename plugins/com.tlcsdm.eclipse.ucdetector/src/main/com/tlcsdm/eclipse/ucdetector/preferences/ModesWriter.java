@@ -20,7 +20,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.eclipse.osgi.util.NLS;
-
 import com.tlcsdm.eclipse.ucdetector.Log;
 import com.tlcsdm.eclipse.ucdetector.Messages;
 import com.tlcsdm.eclipse.ucdetector.UCDInfo;
@@ -53,7 +52,7 @@ public class ModesWriter {
     text.append(String.format("### Created date: %s%n", UCDInfo.getNow(false)));
     text.append(String.format("### java.util.Properties.load() may fail to load this file%n"));
     text.append(String.format("### -------------------------------------------------------------------------%n"));
-    Map<String, String> groupPrefs = new LinkedHashMap<>();
+    Map<String, String> groupPrefs = new LinkedHashMap<String, String>();
     for (String extendedPreference : extendedPreferences) {
       if (extendedPreference.startsWith(TAB_START)) {
         flushGroupPrefs(groupPrefs, text);

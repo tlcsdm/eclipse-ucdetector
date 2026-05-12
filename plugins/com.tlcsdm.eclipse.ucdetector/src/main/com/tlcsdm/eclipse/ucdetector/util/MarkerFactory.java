@@ -23,7 +23,6 @@ import org.eclipse.jdt.core.IMember;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.osgi.util.NLS;
-
 import com.tlcsdm.eclipse.ucdetector.Log;
 import com.tlcsdm.eclipse.ucdetector.Messages;
 import com.tlcsdm.eclipse.ucdetector.UCDetectorPlugin;
@@ -72,7 +71,7 @@ public final class MarkerFactory implements IUCDetectorReport {
   private static final Map<String, String> MARKER_MAP;
 
   static {
-    Map<String, String> map = new HashMap<>();
+    Map<String, String> map = new HashMap<String, String>();
     map.put(UCD_MARKER_TYPE_UNUSED       , "unused code"  );
     map.put(UCD_MARKER_TYPE_USED_FEW     , "few used code");
     map.put(UCD_MARKER_TYPE_USE_PRIVATE  , "use private"  );
@@ -118,7 +117,7 @@ public final class MarkerFactory implements IUCDetectorReport {
 
   public static MarkerFactory createInstance() {
     ReportNameManager.setNextFreeFileNumberString();
-    ArrayList<IUCDetectorReport> reportsList = new ArrayList<>();
+    ArrayList<IUCDetectorReport> reportsList = new ArrayList<IUCDetectorReport>();
     reportsList.add(new MarkerReport());
     if (Prefs.isWriteReportFile()) {
       reportsList.add(new XmlReport());
@@ -297,7 +296,7 @@ public final class MarkerFactory implements IUCDetectorReport {
   }
 
   public static Map<String, Object> markerAsMap(IMarker m) {
-    Map<String, Object> result = new HashMap<>();
+    Map<String, Object> result = new HashMap<String, Object>();
     try {
       Map<?, ?> attributes = m.getAttributes();
       for (Object key : attributes.keySet()) {

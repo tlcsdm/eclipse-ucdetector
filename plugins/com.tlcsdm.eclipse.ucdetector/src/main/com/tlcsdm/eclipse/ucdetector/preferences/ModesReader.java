@@ -16,7 +16,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.osgi.util.NLS;
-
 import com.tlcsdm.eclipse.ucdetector.Messages;
 import com.tlcsdm.eclipse.ucdetector.UCDetectorPlugin;
 
@@ -31,7 +30,7 @@ public class ModesReader {
   private static final String MULTILINE_END = "\\";
 
   /**
-   *
+   * 
    * [ 3025571 ] Exception loading modes: Malformed  &#92;uxxxx encoding
    * <p>
    * java.util.Properties.load() fails, because of file names containing Strings (file names)
@@ -42,7 +41,7 @@ public class ModesReader {
    * @return Map containing key value pairs loaded from modeFileName
    */
   public static Map<String, String> loadModeFile(boolean isFile, String modeFileName) {
-    Map<String, String> result = new HashMap<>();
+    Map<String, String> result = new HashMap<String, String>();
     InputStream inStream = null;
     try {
       inStream = getInputStream(isFile, modeFileName);
