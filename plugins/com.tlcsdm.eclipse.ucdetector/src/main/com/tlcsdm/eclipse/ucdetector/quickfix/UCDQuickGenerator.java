@@ -14,13 +14,14 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.ui.IMarkerResolution;
 import org.eclipse.ui.IMarkerResolutionGenerator2;
+
 import com.tlcsdm.eclipse.ucdetector.Log;
 import com.tlcsdm.eclipse.ucdetector.report.MarkerReport.ElementType;
 import com.tlcsdm.eclipse.ucdetector.util.MarkerFactory;
 
 /**
  * Generates Marker Resolutions<br>
- * 
+ *
  * @see "http://wiki.eclipse.org/FAQ_How_do_I_implement_Quick_Fixes_for_my_own_language%3F"
  * See extension point="org.eclipse.ui.ide.markerResolution" in plugin.xml
  * <p>
@@ -38,7 +39,7 @@ public class UCDQuickGenerator implements IMarkerResolutionGenerator2 {
       if (Log.isDebug()) {
         Log.debug("UCDQuickFixer.getResolutions() for: " + markerType); //$NON-NLS-1$
       }
-      List<IMarkerResolution> resolutions = new ArrayList<IMarkerResolution>();
+      List<IMarkerResolution> resolutions = new ArrayList<>();
       if (MarkerFactory.UCD_MARKER_TYPE_UNUSED.equals(markerType)) {
         boolean isPrimaryType = (ElementType.valueOfSave(javaTypeString) == ElementType.PRIMARY_TYPE);
         resolutions.add(isPrimaryType ? new DeleteFileQuickFix(marker) : new DeleteQuickFix(marker));

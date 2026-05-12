@@ -6,12 +6,15 @@
  */
 package com.tlcsdm.eclipse.ucdetector.report;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
+
 import com.tlcsdm.eclipse.ucdetector.Log;
 import com.tlcsdm.eclipse.ucdetector.UCDetectorPlugin;
 
@@ -78,9 +81,9 @@ public final class ReportExtension {
   private static void loadExtensions() {
     if (!isInitialized) {
       isInitialized = true;
-      xsltExtensions = new ArrayList<ReportExtension>();
-      classExtensions = new ArrayList<ReportExtension>();
-      allExtensions = new ArrayList<ReportExtension>();
+      xsltExtensions = new ArrayList<>();
+      classExtensions = new ArrayList<>();
+      allExtensions = new ArrayList<>();
       IExtensionRegistry reg = Platform.getExtensionRegistry();
       IConfigurationElement[] reports = reg.getConfigurationElementsFor(EXTENSION_POINT_ID);
       for (IConfigurationElement report : reports) {
@@ -89,13 +92,20 @@ public final class ReportExtension {
         String xslt = report.getAttribute(ATTRIBUTE_STYLESHEET);
         String clazz = report.getAttribute(ATTRIBUTE_CLASS);
         String id = report.getAttribute(ATTRIBUTE_REPORT_ID);
+        boolean xsltFound = false;
         if (xslt != null && clazz == null) {
-          boolean xsltFound = ReportExtension.class.getClassLoader().getResourceAsStream(xslt) != null;
+          try (InputStream is = ReportExtension.class.getClassLoader().getResourceAsStream(xslt)) {
+            xsltFound = is != null;
+          }
+          catch (IOException e) {
+            Log.error("Can't load XSLT: " + xslt, e); //$NON-NLS-1$
+          }
           if (xsltFound) {
             xsltExtensions.add(new ReportExtension(resultFile, name, xslt, null, id));
           }
           else if (xslt.endsWith("custom.xslt")) { //$NON-NLS-1$
-            Log.info("Tip: To create custom reports rename file to custom.xslt: com.tlcsdm.eclipse.ucdetector_x.y.z.jar/com/tlcsdm/eclipse/ucdetector/report/__custom.xslt"); //$NON-NLS-1$
+            Log.info(
+                "Tip: To create custom reports rename file to custom.xslt: com.tlcsdm.eclipse.ucdetector_x.y.z.jar/com/tlcsdm/eclipse/ucdetector/report/__custom.xslt"); //$NON-NLS-1$
           }
         }
         else if (xslt == null && clazz != null) {

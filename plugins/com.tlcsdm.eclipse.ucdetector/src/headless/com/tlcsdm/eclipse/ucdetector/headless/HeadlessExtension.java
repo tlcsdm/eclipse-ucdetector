@@ -15,6 +15,7 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.ui.internal.WorkbenchPlugin;
+
 import com.tlcsdm.eclipse.ucdetector.Log;
 import com.tlcsdm.eclipse.ucdetector.UCDetectorPlugin;
 import com.tlcsdm.eclipse.ucdetector.iterator.AbstractUCDetectorIterator;
@@ -55,7 +56,7 @@ public final class HeadlessExtension {
     if (!isInitialized) {
       Log.info("Load HeadlessExtensions"); //$NON-NLS-1$
       isInitialized = true;
-      headlessExtensionList = new ArrayList<HeadlessExtension>();
+      headlessExtensionList = new ArrayList<>();
       IExtensionRegistry reg = Platform.getExtensionRegistry();
       IConfigurationElement[] elements = reg.getConfigurationElementsFor(EXTENSION_POINT_ID);
       for (IConfigurationElement element : elements) {
@@ -77,7 +78,7 @@ public final class HeadlessExtension {
 
   public static List<AbstractUCDetectorIterator> getPostIterators() {
     loadExtensions();
-    ArrayList<AbstractUCDetectorIterator> result = new ArrayList<AbstractUCDetectorIterator>();
+    ArrayList<AbstractUCDetectorIterator> result = new ArrayList<>();
     Collections.sort(headlessExtensionList, new IteratorExtensionSorter());
     for (HeadlessExtension headlessExtension : headlessExtensionList) {
       result.add(headlessExtension.getIterator());

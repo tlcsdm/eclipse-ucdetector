@@ -30,6 +30,7 @@ import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.osgi.framework.Bundle;
+
 import com.tlcsdm.eclipse.ucdetector.Log;
 import com.tlcsdm.eclipse.ucdetector.UCDInfo;
 import com.tlcsdm.eclipse.ucdetector.UCDetectorPlugin;
@@ -129,7 +130,7 @@ public class UCDHeadless {
   }
 
   private static List<String> getResourcesToIterate(Map<String, String> options) {
-    List<String> result = new ArrayList<String>();
+    List<String> result = new ArrayList<>();
     String resourcesToIterateString = options.get(HEADLESS_KEY + "resourcesToIterate");
     if (resourcesToIterateString != null) {
       String[] resourcesList = resourcesToIterateString.split(",");
@@ -244,7 +245,7 @@ public class UCDHeadless {
   private void postIterate(List<IJavaElement> javaElementsToIterate) throws CoreException {
     List<AbstractUCDetectorIterator> postIterators = HeadlessExtension.getPostIterators();
     for (AbstractUCDetectorIterator postIterator : postIterators) {
-      Log.info("Run Post iterator: %s, for: %s",//
+      Log.info("Run Post iterator: %s, for: %s", //
           postIterator.getJobName(), JavaElementUtil.getElementNames(javaElementsToIterate));
       postIterator.setMonitor(ucdMonitor);
       postIterator.iterate(javaElementsToIterate);
@@ -252,7 +253,7 @@ public class UCDHeadless {
   }
 
   private List<IJavaElement> getJavaElementsToIterate(IWorkspaceRoot workspaceRoot, List<IJavaProject> allProjects) {
-    List<IJavaElement> javaElementsToIterate = new ArrayList<IJavaElement>();
+    List<IJavaElement> javaElementsToIterate = new ArrayList<>();
     if (resourcesToIterate == null || resourcesToIterate.isEmpty()) {
       javaElementsToIterate.addAll(allProjects);
     }
@@ -295,11 +296,11 @@ public class UCDHeadless {
 
   private static List<IJavaProject> createProjects(IProgressMonitor monitor, IWorkspaceRoot workspaceRoot)
       throws CoreException {
-    List<IJavaProject> projects = new ArrayList<IJavaProject>();
+    List<IJavaProject> projects = new ArrayList<>();
     File rootDir = workspaceRoot.getLocation().toFile();
     File[] rootFiles = rootDir.listFiles();
     // ---------------------------------------------------------------------------
-    // workspaceRoot.getProjects() DOES NOT WORK, when workspace is completely new 
+    // workspaceRoot.getProjects() DOES NOT WORK, when workspace is completely new
     // We must use low level stuff here:
     // ---------------------------------------------------------------------------
     for (File rootFile : rootFiles) {
