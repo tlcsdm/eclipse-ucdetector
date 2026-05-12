@@ -18,6 +18,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.search.SearchMatch;
+
 import com.tlcsdm.eclipse.ucdetector.Log;
 import com.tlcsdm.eclipse.ucdetector.cycle.model.CycleMember;
 import com.tlcsdm.eclipse.ucdetector.cycle.model.CycleRegion;
@@ -27,7 +28,7 @@ import com.tlcsdm.eclipse.ucdetector.util.JavaElementUtil;
 
 /**
  * Collect the search results for a class
- * 
+ *
  * <pre>
  * Type
  *  |- CycleMember
@@ -41,7 +42,7 @@ class TypeAndMatches {
   private final LineManger lineManger = new LineManger();
 
   private final Map<IType, List<CycleMember>> referencesMap //
-  = new HashMap<IType, List<CycleMember>>();
+      = new HashMap<>();
 
   TypeAndMatches(IType root) {
     if (root == null) {
@@ -80,7 +81,7 @@ class TypeAndMatches {
   private List<CycleMember> getOrCreateCycleElementList(IType matchtedType) {
     List<CycleMember> cycleElementList = referencesMap.get(matchtedType);
     if (cycleElementList == null) {
-      cycleElementList = new ArrayList<CycleMember>();
+      cycleElementList = new ArrayList<>();
       this.referencesMap.put(matchtedType, cycleElementList);
     }
     return cycleElementList;
@@ -120,7 +121,7 @@ class TypeAndMatches {
     StringBuilder sb = new StringBuilder();
     sb.append(root.getElementName()).append(" (root)").append('\n'); //$NON-NLS-1$
     Set<Entry<IType, List<CycleMember>>> entrySet//
-    = referencesMap.entrySet();
+        = referencesMap.entrySet();
     for (Entry<IType, List<CycleMember>> entry : entrySet) {
       sb.append("  |-").append(entry.getKey().getElementName()); //$NON-NLS-1$
       sb.append(" (ref found)").append('\n'); //$NON-NLS-1$

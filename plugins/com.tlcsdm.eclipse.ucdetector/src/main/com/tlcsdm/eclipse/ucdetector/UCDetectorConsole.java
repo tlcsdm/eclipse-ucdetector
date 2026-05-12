@@ -41,7 +41,6 @@ public class UCDetectorConsole extends MessageConsole {
   }
 
   public static void log(boolean isWarn, String formattedMessage, Throwable ex) {
-    @SuppressWarnings("resource")
     PrintStream stream = isWarn ? consoleStreamWarn : consoleStreamInfo;
     if (stream != null) {
       if (formattedMessage != null) {
@@ -105,24 +104,24 @@ public class UCDetectorConsole extends MessageConsole {
     }
 
     @Override
-    @SuppressWarnings("rawtypes")
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public Object getAdapter(Class adapter) {
       return null;
     }
 
     @Override
     public void dispose() {
-      //
+      // Do nothing
     }
 
     @Override
     public void activated() {
-      //
+      // Do nothing
     }
 
     @Override
     public void deactivated() {
-      //
+      // Do nothing
     }
   }
 

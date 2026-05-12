@@ -38,6 +38,7 @@ import org.eclipse.jdt.core.IParent;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+
 import com.tlcsdm.eclipse.ucdetector.Log;
 import com.tlcsdm.eclipse.ucdetector.preferences.Prefs;
 import com.tlcsdm.eclipse.ucdetector.search.UCDProgressMonitor;
@@ -61,7 +62,7 @@ public abstract class AbstractUCDetectorIterator {
   protected IJavaElement[] objectsToIterate;
 
   private IPackageFragment activePackage;
-  private final List<IPackageFragment> visitedPackages = new ArrayList<IPackageFragment>();
+  private final List<IPackageFragment> visitedPackages = new ArrayList<>();
 
   private final long timeStart = System.currentTimeMillis();
   private long timeEnd = 0;
@@ -76,7 +77,7 @@ public abstract class AbstractUCDetectorIterator {
    */
   public final void iterateAll() throws CoreException { // NO_UCD
     IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
-    List<IJavaProject> openProjects = new ArrayList<IJavaProject>();
+    List<IJavaProject> openProjects = new ArrayList<>();
     for (IProject tempProject : projects) {
       IJavaProject project = JavaCore.create(tempProject);
       if (project.isOpen()) {
@@ -314,8 +315,8 @@ public abstract class AbstractUCDetectorIterator {
    */
   protected static final void debugNotHandle(IMember member, String reason) {
     if (Log.isDebug()) {
-      Log.debug("IGNORE %-15s '%s' -> %s",// //$NON-NLS-1$
-          JavaElementUtil.getMemberTypeString(member),//
+      Log.debug("IGNORE %-15s '%s' -> %s", // //$NON-NLS-1$
+          JavaElementUtil.getMemberTypeString(member), //
           JavaElementUtil.getElementName(member), //
           reason);
     }
@@ -328,11 +329,11 @@ public abstract class AbstractUCDetectorIterator {
   // Improved logging for: #71 ignore source folders doesn't seem to support 2 level deep folders
   protected static final void debugHandle(IJavaElement javaElement, String reason, boolean doChildren) {
     if (Log.isDebug()) {
-      Log.debug("DO CHILDREN %s, %-15s '%s' -> %s",// //$NON-NLS-1$
+      Log.debug("DO CHILDREN %s, %-15s '%s' -> %s", // //$NON-NLS-1$
           Boolean.valueOf(doChildren), //
-          javaElement == null ? "?" : javaElement.getClass().getSimpleName(),// //$NON-NLS-1$
-              JavaElementUtil.getElementName(javaElement), //
-              reason);
+          javaElement == null ? "?" : javaElement.getClass().getSimpleName(), // //$NON-NLS-1$
+          JavaElementUtil.getElementName(javaElement), //
+          reason);
     }
   }
 

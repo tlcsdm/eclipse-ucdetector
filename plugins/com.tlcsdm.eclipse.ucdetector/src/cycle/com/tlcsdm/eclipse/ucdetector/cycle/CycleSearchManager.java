@@ -27,6 +27,7 @@ import org.eclipse.jdt.core.search.SearchMatch;
 import org.eclipse.jdt.core.search.SearchPattern;
 import org.eclipse.jdt.core.search.SearchRequestor;
 import org.eclipse.osgi.util.NLS;
+
 import com.tlcsdm.eclipse.ucdetector.Log;
 import com.tlcsdm.eclipse.ucdetector.Messages;
 import com.tlcsdm.eclipse.ucdetector.cycle.model.Cycle;
@@ -44,7 +45,7 @@ class CycleSearchManager {
    * We search cycles for each project, because there should be no
    * cycles between project A and project B!
    */
-  private final Map<IJavaProject, List<IType>> typesMap = new HashMap<IJavaProject, List<IType>>();
+  private final Map<IJavaProject, List<IType>> typesMap = new HashMap<>();
   private final IJavaElement[] selections;
 
   public CycleSearchManager(IProgressMonitor monitor, List<IType> types, IJavaElement[] selections) {
@@ -55,7 +56,7 @@ class CycleSearchManager {
       IJavaProject javaProject = type.getJavaProject();
       List<IType> typesList = typesMap.get(javaProject);
       if (typesList == null) {
-        typesList = new ArrayList<IType>();
+        typesList = new ArrayList<>();
         typesMap.put(javaProject, typesList);
       }
       typesList.add(type);
@@ -78,7 +79,6 @@ class CycleSearchManager {
       monitor.subTask(Messages.CycleSearchManager_Project_Info + javaProject.getElementName());
       monitor.worked(1);
       List<Cycle> cycleList = cycleCalculator.calculate();
-      //
       searchResult.setCycles(cycleList);
       if (Log.isDebug()) {
         Log.debug("Found cycles:\r\n" + searchResult); //$NON-NLS-1$
@@ -89,7 +89,7 @@ class CycleSearchManager {
   }
 
   private List<TypeAndMatches> searchAllTypes(List<IType> types, int projectNr) throws CoreException {
-    List<TypeAndMatches> result = new ArrayList<TypeAndMatches>();
+    List<TypeAndMatches> result = new ArrayList<>();
     int search = 0;
     for (IType type : types) {
       if (monitor.isCanceled()) {
@@ -102,10 +102,6 @@ class CycleSearchManager {
       TypeAndMatches typeAndMatches = new TypeAndMatches(type);
       SearchPattern pattern = SearchPattern.createPattern(type, IJavaSearchConstants.REFERENCES,
           SearchPattern.R_EXACT_MATCH);
-      // IJavaSearchScope scope = SearchEngine.createWorkspaceScope();
-      //      IJavaProject javaProject = type.getJavaProject();
-      //      IJavaSearchScope scope = SearchEngine.createJavaSearchScope(
-      //          new IJavaProject[] { javaProject }, false);
       ReferenceSearchRequestor requestor = new ReferenceSearchRequestor(typeAndMatches);
       JavaElementUtil.runSearch(pattern, requestor);
       result.add(typeAndMatches);
@@ -118,7 +114,7 @@ class CycleSearchManager {
   }
 
   private String getMonitorMessage(List<IType> types, int projectNr, int search, IType type) {
-    List<Object> bindingList = new ArrayList<Object>();
+    List<Object> bindingList = new ArrayList<>();
     if (typesMap.size() > 1) {
       bindingList.add(Integer.valueOf(projectNr));
       bindingList.add(Integer.valueOf(typesMap.size()));

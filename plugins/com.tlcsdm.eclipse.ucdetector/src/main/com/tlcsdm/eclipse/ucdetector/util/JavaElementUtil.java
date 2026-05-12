@@ -41,6 +41,7 @@ import org.eclipse.jdt.core.search.SearchEngine;
 import org.eclipse.jdt.core.search.SearchParticipant;
 import org.eclipse.jdt.core.search.SearchPattern;
 import org.eclipse.jdt.core.search.SearchRequestor;
+
 import com.tlcsdm.eclipse.ucdetector.Log;
 import com.tlcsdm.eclipse.ucdetector.UCDetectorPlugin;
 import com.tlcsdm.eclipse.ucdetector.search.CountSearchRequestor;
@@ -136,7 +137,7 @@ public final class JavaElementUtil {
    * @throws CoreException when there are problems finding sub packages
    */
   public static List<IPackageFragment> getSubPackages(IPackageFragment packageFragment) throws CoreException {
-    List<IPackageFragment> subPackages = new ArrayList<IPackageFragment>();
+    List<IPackageFragment> subPackages = new ArrayList<>();
     IJavaElement[] allPackages = ((IPackageFragmentRoot) packageFragment.getParent()).getChildren();
     for (IJavaElement javaElement : allPackages) {
       IPackageFragment pakage = (IPackageFragment) javaElement;
@@ -604,7 +605,7 @@ public final class JavaElementUtil {
     Interface     ("j_int_obj.gif"              ),
     Method        ("j_methpub_obj.gif"          ),
     // @formatter:onn
-                    ;
+    ;
 
     private final String icon;
 
@@ -1002,10 +1003,10 @@ public final class JavaElementUtil {
     //        + visitor.annotation.getFullyQualifiedName());
     return visitor.annotation.getFullyQualifiedName();
   }
-  
+
   private static class FindAnnotationVisitor extends ASTVisitor {
     private Name annotation;
-  
+
     @Override
     public boolean visit(MethodDeclaration node) {
       for (Object modifier : node.modifiers()) {
@@ -1018,7 +1019,7 @@ public final class JavaElementUtil {
       return false;
     }
   }
-  
+
    */
   /*
    * @see OverrideIndicatorLabelDecorator, MethodOverrideTester
@@ -1048,7 +1049,7 @@ public final class JavaElementUtil {
     addAllSuperClasses(clazz, result);
     return result;
   }
-  
+
   private static void addAllSuperClasses(Class<?> clazz, Set<Class<?>> result) {
     Class<?>[] interfaces = clazz.getInterfaces();
     for (Class<?> interfaze : interfaces) {

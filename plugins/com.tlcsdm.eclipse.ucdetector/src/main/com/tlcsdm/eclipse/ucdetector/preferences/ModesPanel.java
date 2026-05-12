@@ -35,6 +35,7 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
+
 import com.tlcsdm.eclipse.ucdetector.Log;
 import com.tlcsdm.eclipse.ucdetector.Messages;
 import com.tlcsdm.eclipse.ucdetector.UCDInfo;
@@ -157,11 +158,11 @@ class ModesPanel {
 
   /** Get built in modes and user specific modes */
   private static String[] getModes() {
-    Set<String> result = new LinkedHashSet<String>();
+    Set<String> result = new LinkedHashSet<>();
     for (Mode mode : Mode.values()) {
       result.add(mode.toStringLocalized());
     }
-    List<String> modesFiles = new ArrayList<String>(Arrays.asList(MODES_DIR.list()));
+    List<String> modesFiles = new ArrayList<>(Arrays.asList(MODES_DIR.list()));
     Collections.sort(modesFiles, String.CASE_INSENSITIVE_ORDER);
     for (String modesFile : modesFiles) {
       if (modesFile.endsWith(ModesWriter.MODES_FILE_TYPE)) {
@@ -177,9 +178,9 @@ class ModesPanel {
   /** Add a user specific mode, and save it to a file */
   private void activeModeAdd() {
     String newName = NLS.bind(Messages.ModesPanel_ModeCopyOf, getActiveModeName());
-    InputDialog input = new InputDialog(parent.getShell(),//
-        Messages.ModesPanel_ModeNewTitle,//
-        Messages.ModesPanel_ModeName,//
+    InputDialog input = new InputDialog(parent.getShell(), //
+        Messages.ModesPanel_ModeNewTitle, //
+        Messages.ModesPanel_ModeName, //
         newName, //
         new ValidFileNameValidator()//
     );
@@ -190,8 +191,8 @@ class ModesPanel {
 
   private void activeModeRemove() {
     String modeToRemove = getCombo().getText();
-    boolean doRemove = MessageDialog.openQuestion(parent.getShell(),//
-        Messages.ModesPanel_ModeRemoveTitle,//
+    boolean doRemove = MessageDialog.openQuestion(parent.getShell(), //
+        Messages.ModesPanel_ModeRemoveTitle, //
         Messages.ModesPanel_ModeRemoveQuestion + modeToRemove//
     );
     if (!doRemove) {
@@ -208,8 +209,8 @@ class ModesPanel {
 
   private void activeModeRename() {
     String oldName = getActiveModeName();
-    InputDialog input = new InputDialog(parent.getShell(),//
-        Messages.ModesPanel_ModeRenameTitle,//
+    InputDialog input = new InputDialog(parent.getShell(), //
+        Messages.ModesPanel_ModeRenameTitle, //
         Messages.ModesPanel_ModeName, //
         oldName, //
         new ValidFileNameValidator()//

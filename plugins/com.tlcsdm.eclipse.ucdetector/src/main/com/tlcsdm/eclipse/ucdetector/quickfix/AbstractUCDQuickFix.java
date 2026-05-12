@@ -35,6 +35,7 @@ import org.eclipse.text.edits.TextEdit;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.views.markers.WorkbenchMarkerResolution;
+
 import com.tlcsdm.eclipse.ucdetector.Log;
 import com.tlcsdm.eclipse.ucdetector.UCDetectorPlugin;
 import com.tlcsdm.eclipse.ucdetector.report.MarkerReport.ElementType;
@@ -59,7 +60,7 @@ import com.tlcsdm.eclipse.ucdetector.util.MarkerFactory;
  * @author Joerg Spieler
  * @since 2008-09-22
  */
-@SuppressWarnings("nls")
+@SuppressWarnings({ "nls", "javadoc" })
 public abstract class AbstractUCDQuickFix extends WorkbenchMarkerResolution {
   private static final String QUICK_FIX_PROBLEMS = "Quick Fix Problems";
   int charStart = -1;
@@ -237,7 +238,7 @@ public abstract class AbstractUCDQuickFix extends WorkbenchMarkerResolution {
 
   @Override
   public IMarker[] findOtherMarkers(IMarker[] markers) {
-    final List<IMarker> result = new ArrayList<IMarker>();
+    final List<IMarker> result = new ArrayList<>();
     for (IMarker markerToCheck : markers) {
       if (isOtherMarker(markerToCheck)) {
         result.add(markerToCheck);

@@ -149,6 +149,7 @@ import org.eclipse.jface.preference.FieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.IntegerFieldEditor;
 import org.eclipse.jface.preference.StringFieldEditor;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -167,11 +168,11 @@ import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
-import org.eclipse.osgi.util.NLS;
-import com.tlcsdm.eclipse.ucdetector.Messages;
 import org.eclipse.ui.PlatformUI;
+
 import com.tlcsdm.eclipse.ucdetector.Log;
 import com.tlcsdm.eclipse.ucdetector.Log.LogLevel;
+import com.tlcsdm.eclipse.ucdetector.Messages;
 import com.tlcsdm.eclipse.ucdetector.UCDInfo;
 import com.tlcsdm.eclipse.ucdetector.UCDetectorPlugin;
 import com.tlcsdm.eclipse.ucdetector.report.ReportExtension;
@@ -191,11 +192,11 @@ import com.tlcsdm.eclipse.ucdetector.report.ReportNameManager;
  */
 public class UCDetectorPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
   private static final String SEPARATOR = ":"; //$NON-NLS-1$
-  protected final List<FieldEditor> fields = new ArrayList<FieldEditor>();
+  protected final List<FieldEditor> fields = new ArrayList<>();
   /** Hack to enable/disable children of groups (=fields)  */
-  protected final List<Composite> groups = new ArrayList<Composite>();
+  protected final List<Composite> groups = new ArrayList<>();
   /** Contains group names, tab names, preference names */
-  protected final List<String> extendedPreferences = new ArrayList<String>();
+  protected final List<String> extendedPreferences = new ArrayList<>();
   // @formatter:off
   protected static final String GROUP_START = "# "; //$NON-NLS-1$
   protected static final String TAB_START   = "## "; //$NON-NLS-1$
@@ -467,7 +468,8 @@ public class UCDetectorPreferencePage extends FieldEditorPreferencePage implemen
     Label label = new Label(parent, SWT.LEFT);
     label.setText(PreferencePage_ChangeVisibilityCombos);
     changeVisibiliyCombo = new Combo(parent, SWT.READ_ONLY);
-    changeVisibiliyCombo.setItems(new String[] { // @formatter:off
+    changeVisibiliyCombo.setItems(
+        new String[] { // @formatter:off
           WarnLevel.ERROR  .toStringLocalized(),
           WarnLevel.WARNING.toStringLocalized(),
           WarnLevel.IGNORE .toStringLocalized()
