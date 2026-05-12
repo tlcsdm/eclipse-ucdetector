@@ -15,13 +15,6 @@
         class="com.tlcsdm.eclipse.ucdetector.preferences.UCDetectorPreferencePage"
         id="com.tlcsdm.eclipse.ucdetector.preferences.PreferencePage.tlcsdm">
     </page>
-    <!--
-    <page name="%preferencePages.name.keywords"
-	      class="com.tlcsdm.eclipse.ucdetector.preferences.UCDetectorPreferencePageKeywords"
-        id="com.tlcsdm.eclipse.ucdetector.preferences.UCDetectorPreferencePageKeywords"
-		    category="com.tlcsdm.eclipse.ucdetector.preferences.PreferencePage">
-   	</page>
-   	-->
   </extension>
 
   <!-- =====================================================================
@@ -143,25 +136,6 @@
       </menu>
     </menuContribution>
   </extension>
-
-
-  <!-- =====================================================================
-       COMMAND+BINDINGS to declare shortcut  Alt+Shift+U
-       2017-03-31: Removed: Does not work. Needs commands instead of actions
-       ===================================================================== 
-	<extension point="org.eclipse.ui.commands"> 
-		<command name="%command.name.0" 
-		       id="com.tlcsdm.eclipse.ucdetector.definitionId.ucd"> 
-		</command>
-	</extension>
-	<extension point="org.eclipse.ui.bindings" name="%extension.name.0"> 
-    <key commandId="com.tlcsdm.eclipse.ucdetector.definitionId.ucd" 
-         contextId="org.eclipse.ui.contexts.window" 
-         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" 
-         sequence="M2+M3+U"
-         /> 
-  </extension>
-  -->
 
   <!-- =====================================================================
        MARKER
@@ -361,12 +335,6 @@
      markerType="com.tlcsdm.eclipse.ucdetector.analyzeMarkerTestOnly"
      class="com.tlcsdm.eclipse.ucdetector.quickfix.UCDQuickGenerator"/>
   </extension>
-  <!-- no quickFix for few references
-  <extension point="org.eclipse.ui.ide.markerResolution">
-    <markerResolutionGenerator
-     markerType="com.tlcsdm.eclipse.ucdetector.analyzeMarkerFewReference"
-     class="com.tlcsdm.eclipse.ucdetector.quickfix.UCDQuickGenerator"/>
-  </extension> -->
   <extension point="org.eclipse.ui.ide.markerResolution">
     <markerResolutionGenerator
      markerType="com.tlcsdm.eclipse.ucdetector.analyzeMarkerFinal"
