@@ -10,10 +10,14 @@ package com.tlcsdm.eclipse.ucdetector.quickfix;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.filebuffers.FileBuffers;
 import org.eclipse.core.filebuffers.ITextFileBuffer;
+import org.eclipse.core.filebuffers.ITextFileBufferManager;
+import org.eclipse.core.filebuffers.LocationKind;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.dom.ASTParser;
@@ -25,7 +29,6 @@ import org.eclipse.jdt.core.dom.Modifier.ModifierKeyword;
 import org.eclipse.jdt.core.dom.SimpleName;
 import org.eclipse.jdt.core.dom.rewrite.ASTRewrite;
 import org.eclipse.jdt.core.dom.rewrite.ListRewrite;
-import org.eclipse.jdt.internal.corext.refactoring.util.RefactoringFileBuffers;
 import org.eclipse.jdt.internal.ui.javaeditor.EditorUtility;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
@@ -80,6 +83,7 @@ public abstract class AbstractUCDQuickFix extends WorkbenchMarkerResolution {
     // Solution: Set field charStart here using marker2 not marker
     charStart = marker2.getAttribute(IMarker.CHAR_START, -1);
     ICompilationUnit originalUnit = null;
+    IPath bufferPath = null;
     try {
       if (Log.isDebug()) {
         Log.debug("%s.run(). Marker=%s", getClass().getSimpleName(), MarkerFactory.dumpMarker(marker));
@@ -93,7 +97,15 @@ public abstract class AbstractUCDQuickFix extends WorkbenchMarkerResolution {
         Log.warn("Can't find CompilationUnit: " + marker.getType());
         return;
       }
-      ITextFileBuffer textFileBuffer = RefactoringFileBuffers.acquire(originalUnit);
+      IPath path = originalUnit.getPath();
+      ITextFileBufferManager bufferManager = FileBuffers.getTextFileBufferManager();
+      bufferManager.connect(path, LocationKind.IFILE, null);
+      bufferPath = path;
+      ITextFileBuffer textFileBuffer = bufferManager.getTextFileBuffer(path, LocationKind.IFILE);
+      if (textFileBuffer == null) {
+        Log.warn("Can't acquire text file buffer for: '%s'", MarkerFactory.dumpMarker(marker));
+        return;
+      }
       doc = textFileBuffer.getDocument();
       CompilationUnit copyUnit = createCopy(originalUnit);
       rewrite = ASTRewrite.create(copyUnit.getAST());
@@ -136,8 +148,8 @@ public abstract class AbstractUCDQuickFix extends WorkbenchMarkerResolution {
     }
     finally {
       try {
-        if (originalUnit != null) {
-          RefactoringFileBuffers.release(originalUnit);
+        if (bufferPath != null) {
+          FileBuffers.getTextFileBufferManager().disconnect(bufferPath, LocationKind.IFILE, null);
         }
       }
       catch (CoreException e) {
