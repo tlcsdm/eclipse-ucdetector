@@ -366,6 +366,16 @@ public class SearchManager {
     }
     VisibilityHandler visibilityHandler = new VisibilityHandler(markerFactory, member);
     UCDSearchRequestor foundResult = searchJavaImpl(member, visibilityHandler);
+    // Bug fix: For enum types, also consider references to enum constants for visibility.
+    // Switch case labels (e.g., "case CONSTANT1:") reference the enum constant but not
+    // the enum type directly, so they are missed when searching for references to the type.
+    // See: https://sourceforge.net/p/ucdetector/bugs/83/
+    if (member instanceof IType) {
+      IType type = (IType) member;
+      if (type.isEnum()) {
+        checkEnumConstantVisibility(type, visibilityHandler);
+      }
+    }
     int found = foundResult.found;
     int foundInTextFiles = 0;
     boolean isTestOnlyMatches = found > 0 && (found == foundResult.foundTest);
@@ -436,6 +446,41 @@ public class SearchManager {
       requestor.found = 1;
     }
     return requestor;
+  }
+
+  /**
+   * For enum types, check whether any of their enum constants are referenced from
+   * outside the current visibility scope, and update the visibility handler accordingly.
+   * <p>
+   * Switch case labels like {@code case CONSTANT1:} reference the enum constant but not
+   * the enum type by name, so they are missed when searching for references to the type
+   * alone. This method ensures the visibility of the enum type accounts for all places
+   * where its constants are used.
+   * <p>
+   * See: https://sourceforge.net/p/ucdetector/bugs/83/
+   */
+  private static void checkEnumConstantVisibility(IType enumType, VisibilityHandler visibilityHandler)
+      throws CoreException {
+    for (IField field : enumType.getFields()) {
+      if (!field.isEnumConstant()) {
+        continue;
+      }
+      SearchPattern pattern = SearchPattern.createPattern(field, IJavaSearchConstants.REFERENCES);
+      JavaElementUtil.runSearch(pattern, new SearchRequestor() {
+        @Override
+        public void acceptSearchMatch(SearchMatch match) {
+          IJavaElement matchJavaElement = defaultIgnoreMatch(match);
+          if (matchJavaElement == null) {
+            return;
+          }
+          // Ignore imports, they may be unnecessary
+          if (matchJavaElement instanceof IImportDeclaration) {
+            return;
+          }
+          visibilityHandler.checkVisibility(matchJavaElement);
+        }
+      });
+    }
   }
 
   /**
