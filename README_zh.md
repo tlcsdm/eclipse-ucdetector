@@ -39,8 +39,7 @@ UCDetector（不必要的代码检测器 - 发音为“You See Detector”）是
 
 **手动安装：**
 
-下载插件 jar 并将其复制到 Eclipse 插件目录。jar 位置为（替换 ``<version>``）：
-``https://raw.githubusercontent.com/tlcsdm/eclipse-ucdetector/update_site/plugins/com.tlcsdm.eclipse.ucdetector_<version>.jar``。或者，您可以下载上面发布链接中捆绑的所有其他内容的整个更新站点，并在 Eclipse 中创建一个新的更新站点，指向您展开发布的本地目录。
+从 [Jenkins](https://jenkins.tlcsdm.com/job/eclipse-plugin/job/eclipse-ucdetector) 获取
 
 ## 许可证
 

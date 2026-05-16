@@ -53,7 +53,7 @@ The `launches/` folder contains ready-to-use Eclipse launch configurations (`UCD
 ## Install
 
 1. Add `https://raw.githubusercontent.com/tlcsdm/eclipse-ucdetector/update_site/` as the update site in Eclipse.
-2. Download the generated update site archive from CI/release artifacts and install it as a local update site.
+2. Download from [Jenkins](https://jenkins.tlcsdm.com/job/eclipse-plugin/job/eclipse-ucdetector)
 
 ## License
 
