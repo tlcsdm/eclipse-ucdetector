@@ -37,3 +37,7 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+# Windows shortcuts
+*.lnk
+__pycache__/
