@@ -6,6 +6,14 @@ Newer changes for this fork are tracked in the GitHub releases of
 [tlcsdm/eclipse-ucdetector](https://github.com/tlcsdm/eclipse-ucdetector/releases).
 
 ```text
+UCDetector 2.1.1 from XXX - eclipse >=4.2 (3.8):
+
+New features:
+ 
+Bugfixes:
+- Make record declarations visible (https://github.com/tlcsdm/eclipse-ucdetector/pull/40)
+
+// -----------------------------------------------------------------------------
 UCDetector 2.1.0 from XXX - eclipse >=4.2 (3.8):
 
 New features:
