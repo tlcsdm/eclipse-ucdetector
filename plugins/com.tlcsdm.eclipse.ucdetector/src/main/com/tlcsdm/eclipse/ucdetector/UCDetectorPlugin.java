@@ -355,8 +355,8 @@ public class UCDetectorPlugin extends AbstractUIPlugin {
 
   /** Try newest Parser first. */
   private static final int[] AST_PARSER_LEVELS = { //
-      8, // AST.JLS8
       AST.getJLSLatest(), // AST.JLS4, fixes: #70 Error in numeric literal with underscores:  http://sourceforge.net/p/ucdetector/bugs/70/
+      8, // AST.JLS8
       //AST.JLS3, //
   };
 

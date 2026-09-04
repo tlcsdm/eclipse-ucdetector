@@ -17,6 +17,7 @@ import org.eclipse.jdt.core.dom.EnumConstantDeclaration;
 import org.eclipse.jdt.core.dom.EnumDeclaration;
 import org.eclipse.jdt.core.dom.FieldDeclaration;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
+import org.eclipse.jdt.core.dom.RecordDeclaration;
 import org.eclipse.jdt.core.dom.SimpleName;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
@@ -24,7 +25,7 @@ import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 /**
  * Visit all BodyDeclaration's which UCDetector handles:
  * <ul>
- * <li>classes (types, enums, annotations)</li>
+ * <li>classes (types, enums, annotations, records)</li>
  * <li>methods</li>
  * <li>fields</li>
  * </ul>
@@ -52,6 +53,11 @@ public abstract class ASTMemberVisitor extends ASTVisitor {
 
   @Override
   public boolean visit(AnnotationTypeDeclaration declaration) {
+    return visitImpl(declaration, declaration.getName());
+  }
+
+  @Override
+  public boolean visit(RecordDeclaration declaration) {
     return visitImpl(declaration, declaration.getName());
   }
 
